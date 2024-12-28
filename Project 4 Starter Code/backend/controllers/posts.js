@@ -2,33 +2,33 @@ const postModel = require("../models/posts");
 const commentModel = require("../models/comments");
 
 const createNewPost = (req, res) => {
-    const { title, description ,media} = req.body;
-    console.log("herrrr",req);
-    
-    const author = req.token.userId;
-    const newPost = new postModel({
-      title,
-      description,
-      media,
-      author,
-    });
-  
-    newPost
-      .save()
-      .then((post) => {
-        res.status(201).json({
-          success: true,
-          message: `Post created`,
-          post: post,
-        });
-      })
-      .catch((err) => {
-        res.status(500).json({
-          success: false,
-          message: `Server Error`,
-          err: err.message,
-        });
+  const { title, description, media } = req.body;
+  console.log("herrrr", req);
+
+  const author = req.token.userId;
+  const newPost = new postModel({
+    title,
+    description,
+    media,
+    author,
+  });
+
+  newPost
+    .save()
+    .then((post) => {
+      res.status(201).json({
+        success: true,
+        message: `Post created`,
+        post: post,
       });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        err: err.message,
+      });
+    });
 };
 const getAllPosts = (req, res) => {
   postModel
@@ -93,4 +93,5 @@ const updatePostById = (req, res) => {
       });
     });
 };
+
 module.exports = { createNewPost, getAllPosts, deletePostById, updatePostById };
