@@ -1,0 +1,12 @@
+{
+  "name": "project-4-starter-code",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r <a href=\"https://www.meraki-academy.org\" target=\"_blank\" rel=\"noopener noreferrer\">\r  <img width=\"400px\" height=\"100px\" src=\"https://www.meraki-academy.org/assets/img/logov02.svg\" alt=\"Project logo\">\r  </a>\r </p>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
