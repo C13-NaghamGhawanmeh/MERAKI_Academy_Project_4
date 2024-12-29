@@ -62,7 +62,6 @@ const Login = () => {
           login
         </button>
         {isError && <p className="Failed">{error.response.data.message}</p>}
-        {/* {isLogged && <p>{response.data.message}</p>} */}
         {isLogged &&navigate("/Dashboard")}
       </div>
     </>

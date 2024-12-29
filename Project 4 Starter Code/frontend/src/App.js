@@ -13,9 +13,12 @@ export const UserContext = createContext();
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isLogged, setIsLogged] = useState(localStorage.getItem("isLogged"));
+  const [posts, setPosts] = useState([]);
 
   return (
-    <UserContext.Provider value={{ token, setToken, isLogged, setIsLogged }}>
+    <UserContext.Provider
+      value={{ token, setToken, isLogged, setIsLogged, posts, setPosts }}
+    >
       <div className="App">
         <Navbar />
         <Routes>

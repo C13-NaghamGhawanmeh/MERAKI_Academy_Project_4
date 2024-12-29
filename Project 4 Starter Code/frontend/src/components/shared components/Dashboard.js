@@ -1,9 +1,48 @@
-import React from 'react'
+import axios from "axios";
+import React, { useContext, useEffect } from "react";
+import { UserContext } from "../../App";
 
 const Dashboard = () => {
-  return (
-    <div>Dashboard</div>
-  )
-}
+  const { token, setToken, posts, setPosts } = useContext(UserContext);
 
-export default Dashboard
+  const getAllPosts = () => {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    axios
+      .get("http://localhost:5000/posts/getAllPosts", { headers })
+      .then((res) => {
+        console.log(res);
+        setPosts(res.data.posts);
+        console.log("res.data.posts", res.data.posts);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getAllPosts();
+  }, []);
+  return (
+    <div>
+      {posts.map((a, index) => {
+        return (
+          <div className="articles">
+            <div className="desc">
+              <div>{a[index].title}</div>
+              <div>{a[index].description}</div>
+              {/* <div>
+                {a.comments.map((ele) => (
+                  <p>{ele.comment}</p>
+                ))}
+              </div> */}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default Dashboard;

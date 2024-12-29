@@ -62,8 +62,8 @@ const AddPost = () => {
         onChange={changeUrl}
       />
       <button className="Btn3" onClick={addPost}>Add Post</button>
-      {IsCreated&&<p className="success2">{response}</p>}
-      {isError&&<p className="failed2">{error}</p>}
+        {IsCreated&&<p className="success2">{response}</p>}
+        {isError&&<p className="failed2">{error}</p>}
     </div>
   );
 };
