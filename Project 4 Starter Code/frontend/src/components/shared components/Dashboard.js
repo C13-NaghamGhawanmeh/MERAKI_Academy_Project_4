@@ -26,17 +26,12 @@ const Dashboard = () => {
   }, []);
   return (
     <div>
-      {posts.map((a, index) => {
+      {posts?.map((a, index) => {
         return (
-          <div className="articles">
+          <div className="posts" key={index}>
             <div className="desc">
-              <div>{a[index].title}</div>
-              <div>{a[index].description}</div>
-              {/* <div>
-                {a.comments.map((ele) => (
-                  <p>{ele.comment}</p>
-                ))}
-              </div> */}
+              <div>{a.title}</div>
+              <div>{a.description}fcg</div>
             </div>
           </div>
         );

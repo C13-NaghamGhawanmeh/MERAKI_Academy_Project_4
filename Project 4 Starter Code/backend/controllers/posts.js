@@ -38,7 +38,7 @@ const getAllPosts = (req, res) => {
       res.status(200).json({
         success: true,
         message: "All the posts",
-        posts: [result],
+        posts: result,
       });
     })
     .catch((err) => {

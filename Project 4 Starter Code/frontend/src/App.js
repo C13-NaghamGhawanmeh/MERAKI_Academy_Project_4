@@ -13,7 +13,7 @@ export const UserContext = createContext();
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isLogged, setIsLogged] = useState(localStorage.getItem("isLogged"));
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState();
 
   return (
     <UserContext.Provider
