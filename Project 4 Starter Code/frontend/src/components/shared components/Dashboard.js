@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../App";
-import "../../../src/App.css"
+import "../../../src/App.css";
 const Dashboard = () => {
   const { token, setToken, posts, setPosts } = useContext(UserContext);
 
@@ -24,6 +24,21 @@ const Dashboard = () => {
   useEffect(() => {
     getAllPosts();
   }, []);
+  const deletePostById = (id) => {
+    axios
+      .delete(`http://localhost:5000/posts/${id}/delete`)
+      .then((res) => {
+        const post = posts.filter((post, index) => {
+          return post._id !== id;
+        });
+        setPosts(post);
+        console.log(posts);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       {posts?.map((a, index) => {
@@ -35,6 +50,15 @@ const Dashboard = () => {
               {a.media.map((p, index) => {
                 return <img src={p} />;
               })}
+              <button
+                id={a._id}
+                className="Btn4"
+                onClick={(e) => {
+                  deletePostById(e.target.id);
+                }}
+              >
+                delete
+              </button>
             </div>
           </div>
         );
