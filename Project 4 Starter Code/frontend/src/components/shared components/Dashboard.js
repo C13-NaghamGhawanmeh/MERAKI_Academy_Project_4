@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../App";
-
+import "../../../src/App.css"
 const Dashboard = () => {
   const { token, setToken, posts, setPosts } = useContext(UserContext);
 
@@ -30,8 +30,11 @@ const Dashboard = () => {
         return (
           <div className="posts" key={index}>
             <div className="desc">
-              <div>{a.title}</div>
-              <div>{a.description}fcg</div>
+              <div>title : {a.title}</div>
+              <div>description : {a.description}</div>
+              {a.media.map((p, index) => {
+                return <img src={p} />;
+              })}
             </div>
           </div>
         );

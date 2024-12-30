@@ -3,8 +3,9 @@
 
 }
 
-
-
-
-
-
+.posts{
+  background-color: rgb(221, 202, 238);
+  display: flex;
+  flex-direction: column;
+  gap :50px
+}
