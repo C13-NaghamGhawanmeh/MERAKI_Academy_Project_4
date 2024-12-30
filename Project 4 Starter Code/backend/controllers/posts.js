@@ -31,6 +31,8 @@ const createNewPost = (req, res) => {
     });
 };
 const getAllPosts = (req, res) => {
+  const userId = req.token.userId;
+
   postModel
     .find({})
     .populate("comments")
@@ -38,6 +40,7 @@ const getAllPosts = (req, res) => {
       res.status(200).json({
         success: true,
         message: "All the posts",
+        userId: userId,
         posts: result,
       });
     })

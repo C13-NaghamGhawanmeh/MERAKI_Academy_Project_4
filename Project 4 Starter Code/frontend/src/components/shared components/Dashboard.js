@@ -8,6 +8,8 @@ const Dashboard = () => {
   const [description, setDescription] = useState("");
   const [media, setMedia] = useState("");
   const [comment, setcomment] = useState("");
+  const [userId, setUserId] = useState("");
+
   const [isClickedToUpdate, setIsClickedToUpdate] = useState(false);
   const [isCommented, setIsCommented] = useState(false);
   const postInfo = { title, description, media };
@@ -21,6 +23,7 @@ const Dashboard = () => {
       .then((res) => {
         console.log(res);
         setPosts(res.data.posts);
+        setUserId(res.data.userId)
         console.log("res.data.posts", res.data.posts);
       })
       .catch((err) => {
@@ -91,7 +94,8 @@ const Dashboard = () => {
               {a.comments?.map((c,index)=>{
                 return <p>{c.comment}</p>
               })}
-              <button
+
+              {userId===a.author && (<> <button
                 id={a._id}
                 className="Btn4"
                 onClick={(e) => {
@@ -100,6 +104,7 @@ const Dashboard = () => {
               >
                 delete
               </button>
+               
               {isClickedToUpdate || (
                 <button
                   id={a._id}
@@ -112,8 +117,7 @@ const Dashboard = () => {
                   update
                 </button>
               )}
-
-              {isClickedToUpdate && (
+{isClickedToUpdate && (
                 <>
                   <input
                     placeholder="title"
@@ -145,6 +149,11 @@ const Dashboard = () => {
                   </button>
                 </>
               )}
+
+              </>)}
+            
+
+              
               <input
                 placeholder="Comment"
                 onChange={(e) => {
