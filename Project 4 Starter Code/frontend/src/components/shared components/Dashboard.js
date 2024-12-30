@@ -6,8 +6,9 @@ const Dashboard = () => {
   const { token, setToken, posts, setPosts } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [media, setMedia] = useState("")
   const [isClickedToUpdate, setIsClickedToUpdate] = useState(false);
-  const postInfo = { title, description };
+  const postInfo = { title, description ,media };
   const getAllPosts = () => {
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -24,9 +25,6 @@ const Dashboard = () => {
       });
   };
 
-  useEffect(() => {
-    getAllPosts();
-  }, []);
   const deletePostById = (id) => {
     axios
       .delete(`http://localhost:5000/posts/${id}/delete`)
@@ -44,13 +42,21 @@ const Dashboard = () => {
 
   const updatePostById = (id) => {
     axios
-      .put(`http://localhost:5000/articles/${id}`, postInfo)
-      .then((res) => {})
+      .put(`http://localhost:5000/posts/${id}/update`, postInfo)
+      .then((res) => {
+        const post = posts.map((p, index) => {
+          return p;
+        });
+        setPosts(post);
+        getAllPosts();
+      })
       .catch((err) => {
         console.log(err);
       });
   };
-
+  useEffect(() => {
+    getAllPosts();
+  }, []);
   return (
     <div>
       {posts?.map((a, index) => {
@@ -71,20 +77,21 @@ const Dashboard = () => {
               >
                 delete
               </button>
-              <button
-                id={a._id}
-                className="Btn5"
-                onClick={(e) => {
-                  <input>here</input>;
-                  updatePostById(e.target.id);
-                  setIsClickedToUpdate(true);
-                }}
-              >
-                update
-              </button>
+              {isClickedToUpdate || (
+                <button
+                  id={a._id}
+                  className="Btn5"
+                  onClick={(e) => {
+                    <input>here</input>;
+                    setIsClickedToUpdate(true);
+                  }}
+                >
+                  update
+                </button>
+              )}
+
               {isClickedToUpdate && (
                 <>
-                  {" "}
                   <input
                     placeholder="title"
                     onChange={(e) => {
@@ -97,6 +104,20 @@ const Dashboard = () => {
                       setDescription(e.target.value);
                     }}
                   ></textarea>
+                  <input placeholder="media" onChange={(e) => {
+                      setMedia(e.target.value);
+                    }}/>
+
+                  <button
+                    id={a._id}
+                    onClick={(e) => {
+                      updatePostById(e.target.id);
+                    setIsClickedToUpdate(false);
+
+                    }}
+                  >
+                    click
+                  </button>
                 </>
               )}
             </div>
