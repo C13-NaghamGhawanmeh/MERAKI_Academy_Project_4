@@ -1,10 +1,13 @@
 import axios from "axios";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import "../../../src/App.css";
 const Dashboard = () => {
   const { token, setToken, posts, setPosts } = useContext(UserContext);
-
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [isClickedToUpdate, setIsClickedToUpdate] = useState(false);
+  const postInfo = { title, description };
   const getAllPosts = () => {
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -39,6 +42,15 @@ const Dashboard = () => {
       });
   };
 
+  const updatePostById = (id) => {
+    axios
+      .put(`http://localhost:5000/articles/${id}`, postInfo)
+      .then((res) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       {posts?.map((a, index) => {
@@ -59,6 +71,34 @@ const Dashboard = () => {
               >
                 delete
               </button>
+              <button
+                id={a._id}
+                className="Btn5"
+                onClick={(e) => {
+                  <input>here</input>;
+                  updatePostById(e.target.id);
+                  setIsClickedToUpdate(true);
+                }}
+              >
+                update
+              </button>
+              {isClickedToUpdate && (
+                <>
+                  {" "}
+                  <input
+                    placeholder="title"
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                    }}
+                  />
+                  <textarea
+                    placeholder="description"
+                    onChange={(e) => {
+                      setDescription(e.target.value);
+                    }}
+                  ></textarea>
+                </>
+              )}
             </div>
           </div>
         );
