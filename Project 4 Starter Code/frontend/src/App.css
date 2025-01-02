@@ -14,16 +14,50 @@ body {
   background-repeat: no-repeat;
   background-size: cover; */
 }
-.BreadcrumbItem{
+.BreadcrumbItem {
   font-size: 25px;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   display: flex;
   flex-direction: row;
   gap: 15px;
 }
-.Brand{
+.Brand {
   font-size: 35px;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: bold;
   color: rgb(255, 162, 0);
 }
+
+/* Login Style */
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #fccb90;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(
+    to right,
+    #ee7724,
+    #d8363a,
+    #dd3675,
+    #b44593
+  );
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right bottom ,rgb(255, 162, 0), rgb(238, 139, 53), #f2d232, #f08606);
+}
+.text-center {
+  height: 200px;
+}
+@media (min-width: 768px) {
+  .gradient-form {
+    height: 100vh !important;
+  }
+}
+@media (min-width: 769px) {
+  .gradient-custom-2 {
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+  }
+}
+/*  */
+

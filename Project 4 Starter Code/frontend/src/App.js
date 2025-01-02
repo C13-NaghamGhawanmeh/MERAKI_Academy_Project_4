@@ -22,8 +22,8 @@ const App = () => {
       value={{ token, setToken, isLogged, setIsLogged, posts, setPosts }}
     >
       <div className="App">
-        <Test/>
-        {/* <Navbar /> */}
+        {/* <Test/> */}
+        <Navbar />
         <Routes>
           <Route path="/Register" element={<Register />} />
           <Route path="/Login" element={<Login />} />
