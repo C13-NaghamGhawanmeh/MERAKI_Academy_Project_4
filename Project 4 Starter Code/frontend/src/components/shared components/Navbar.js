@@ -6,28 +6,19 @@ import { UserContext } from "../../App";
 import {
   MDBBreadcrumb,
   MDBBreadcrumbItem,
+  MDBBtn,
   MDBContainer,
+  MDBIcon,
   MDBNavbar,
   MDBNavbarBrand,
+  MDBFooter,
 } from "mdb-react-ui-kit";
 const Navbar = () => {
   const { isLogged, token } = useContext(UserContext);
 
   return (
-    // <div className="Navbar">
-    //   {token ?
-    //     <div>
-    //       <Link to={"/Dashboard"}>Dashboard</Link>
-    //       <Link to={"/AddPost"}>Add New Post</Link>
-    //       <Link to={"/Logout"}>Logout</Link>
-    //     </div>
-    //    :
-    //     <div>
-    //       <Link to={"/Register"}>Register</Link>
-    //       <Link to={"/Login"}>Login</Link>
-    //     </div>
-    //   }
-    // </div>
+   <>
+   
     <MDBNavbar sticky light bgColor="light">
       <MDBContainer fluid>
         <MDBNavbarBrand className="Brand" href="#">
@@ -78,6 +69,10 @@ const Navbar = () => {
         </div>
       </MDBContainer>
     </MDBNavbar>
+
+
+   
+    </>
   );
 };
 
