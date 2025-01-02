@@ -8,7 +8,8 @@ import { createContext, useState } from "react";
 import Dashboard from "./components/shared components/Dashboard";
 import AddPost from "./components/shared components/AddPost";
 import Logout from "./components/shared components/logout";
-
+import Test from "./components/shared components/Test";
+import 'antd/dist/reset.css';
 export const UserContext = createContext();
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -16,11 +17,13 @@ const App = () => {
   const [posts, setPosts] = useState();
 
   return (
+  
     <UserContext.Provider
       value={{ token, setToken, isLogged, setIsLogged, posts, setPosts }}
     >
       <div className="App">
-        <Navbar />
+        <Test/>
+        {/* <Navbar /> */}
         <Routes>
           <Route path="/Register" element={<Register />} />
           <Route path="/Login" element={<Login />} />
@@ -30,6 +33,7 @@ const App = () => {
         </Routes>
       </div>
     </UserContext.Provider>
+
   );
 };
 

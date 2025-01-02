@@ -34,7 +34,7 @@ const Navbar = () => {
           SAKAN
         </MDBNavbarBrand>
 
-        <div className="Navbar">
+        <div >
           {token ? (
             <div>
               <nav aria-label="breadcrumb">
