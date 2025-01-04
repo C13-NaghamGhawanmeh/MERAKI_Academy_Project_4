@@ -86,3 +86,9 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+
+.ModalInputs{
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}

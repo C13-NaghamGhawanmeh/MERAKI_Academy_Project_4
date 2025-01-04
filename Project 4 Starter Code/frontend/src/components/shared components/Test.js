@@ -1,181 +1,136 @@
-import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
+import {
+  MDBBtn,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBModalBody,
+  MDBModalFooter,
+  MDBInput,
+  MDBTextArea,
+  MDBProgress,
+  MDBProgressBar,
+} from "mdb-react-ui-kit";
 import { UserContext } from "../../App";
-import "../../../src/App.css";
-const Dashboard = () => {
-  const { token, setToken, posts, setPosts } = useContext(UserContext);
+import axios from "axios";
+
+export default function App() {
+  const { token, setToken } = useContext(UserContext);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [media, setMedia] = useState("");
-  const [comment, setcomment] = useState("");
-  const [userId, setUserId] = useState("");
-
-  const [isClickedToUpdate, setIsClickedToUpdate] = useState(false);
-  const [isCommented, setIsCommented] = useState(false);
+  const [IsCreated, setIsCreated] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [response, setResponse] = useState("");
+  const [error, setError] = useState("");
   const postInfo = { title, description, media };
-  const commentInfo = { comment };
-  const headers = {
-    Authorization: `Bearer ${token}`,
+  const { centredModal, setCentredModal } = useContext(UserContext);
+  const changeTitle = (e) => {
+    setTitle(e.target.value);
   };
-  const getAllPosts = () => {
+  const changeDescription = (e) => {
+    setDescription(e.target.value);
+  };
+  const changeUrl = (e) => {
+    setMedia(e.target.value);
+  };
+  //   const [centredModal, setCentredModal] = useState(false);
+
+  //   const toggleOpen = () => setCentredModal(!centredModal);
+  const addPost = () => {
+    setIsCreated(false);
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
     axios
-      .get("http://localhost:5000/posts/getAllPosts", { headers })
+      .post("http://localhost:5000/posts/createPost", postInfo, { headers })
       .then((res) => {
+        // const data = res
+        setResponse(res.data.message);
+        setIsCreated(true);
+        setIsError(false);
         console.log(res);
-        setPosts(res.data.posts);
-        setUserId(res.data.userId)
-        console.log("res.data.posts", res.data.posts);
       })
       .catch((err) => {
         console.log(err);
+
+        setIsCreated(false);
+        setIsError(true);
+        setError(err.response.data.message);
       });
   };
-
-  const deletePostById = (id) => {
-    axios
-      .delete(`http://localhost:5000/posts/${id}/delete`)
-      .then((res) => {
-        const post = posts.filter((post, index) => {
-          return post._id !== id;
-        });
-        setPosts(post);
-        console.log(posts);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const updatePostById = (id) => {
-    axios
-      .put(`http://localhost:5000/posts/${id}/update`, postInfo)
-      .then((res) => {
-        const post = posts.map((p, index) => {
-          return p;
-        });
-        setPosts(post);
-        getAllPosts();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const addComment = (id) => {
-    setIsCommented(true)
-
-    axios
-      .post(`http://localhost:5000/posts/${id}/comments/`, commentInfo, {
-        headers,
-      })
-      .then((res) => {
-      setIsCommented(false)
-      getAllPosts()
-
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  useEffect(() => {
-    getAllPosts();
-  }, []);
-
   return (
-    <div>
-      {posts?.map((a, index) => {
-        return (
-          <div className="posts" key={index}>
-            <div className="desc">
-              <div>title : {a.title}</div>
-              <div>description : {a.description}</div>
-              {a.media.map((p, index) => {
-                return <img src={p} />;
-              })}
-              {a.comments?.map((c,index)=>{
-                return <p>{c.comment}</p>
-              })}
+    <>
+      {/* <MDBBtn onClick={toggleOpen}>Vertically centered modal</MDBBtn> */}
 
-              {userId===a.author && (<> <button
-                id={a._id}
-                className="Btn4"
-                onClick={(e) => {
-                  deletePostById(e.target.id);
+      <MDBModal
+        tabIndex="-1"
+        open={centredModal}
+        onClose={() => setCentredModal(false)}
+      >
+        <MDBModalDialog centered>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle>Add Post</MDBModalTitle>
+              <MDBBtn
+                className="btn-close"
+                color="none"
+                onClick={() => {
+                  setCentredModal(!centredModal);
                 }}
-              >
-                delete
-              </button>
-               
-              {isClickedToUpdate || (
-                <button
-                  id={a._id}
-                  className="Btn5"
-                  onClick={(e) => {
-                    <input>here</input>;
-                    setIsClickedToUpdate(true);
-                  }}
-                >
-                  update
-                </button>
-              )}
-{isClickedToUpdate && (
-                <>
-                  <input
-                    placeholder="title"
-                    onChange={(e) => {
-                      setTitle(e.target.value);
-                    }}
-                  />
-                  <textarea
-                    placeholder="description"
-                    onChange={(e) => {
-                      setDescription(e.target.value);
-                    }}
-                  ></textarea>
-                  <input
-                    placeholder="media"
-                    onChange={(e) => {
-                      setMedia(e.target.value);
-                    }}
-                  />
-
-                  <button
-                    id={a._id}
-                    onClick={(e) => {
-                      updatePostById(e.target.id);
-                      setIsClickedToUpdate(false);
-                    }}
-                  >
-                    click
-                  </button>
-                </>
-              )}
-
-              </>)}
-            
-
-              
-              <input
-                placeholder="Comment"
-                onChange={(e) => {
-                  setcomment(e.target.value);
-                }}
+              ></MDBBtn>
+            </MDBModalHeader>
+            <MDBModalBody className="ModalInputs">
+              <MDBInput
+                label="Title"
+                id="form1"
+                type="text"
+                onChange={changeTitle}
               />
-              <button
-                id={a._id}
-                onClick={(e) => {
-                  addComment(e.target.id);
-                  setIsCommented(true);
+              <MDBTextArea
+                label="Description"
+                id="textAreaExample"
+                rows="{4}"
+                onChange={changeDescription}
+              />
+              <MDBInput
+                label="Images"
+                id="typeURL"
+                type="url"
+                onChange={changeUrl}
+              />
+            </MDBModalBody>
+            <MDBProgress>
+              <MDBProgressBar
+               striped animated
+                bgColor="warning"
+                width="25"
+                valuemin={0}
+                valuemax={100}
+              />
+            </MDBProgress>
+            {IsCreated && <p className="success2">{response}</p>}
+            {isError && <p className="failed2">{error}</p>}
+            <MDBModalFooter>
+              <MDBBtn
+                color="secondary"
+                onClick={() => {
+                  setCentredModal(!centredModal);
                 }}
               >
-                add Comment
-              </button>
-              {/* {isCommented && <p>{comment}</p>} */}
-            </div>
-          </div>
-        );
-      })}
-    </div>
+                Close
+              </MDBBtn>
+              <MDBBtn color="warning" onClick={addPost}>
+                Add Post
+              </MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>
+    </>
   );
-};
-
-export default Dashboard;
+}

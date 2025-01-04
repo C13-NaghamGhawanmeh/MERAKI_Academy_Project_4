@@ -22,7 +22,7 @@ import {
 
 } from "mdb-react-ui-kit";
 const Navbar = () => {
-  const { isLogged, token } = useContext(UserContext);
+  const { isLogged, token , centredModal,setCentredModal } = useContext(UserContext);
 
   return (
     <>
@@ -48,9 +48,12 @@ const Navbar = () => {
                         <a href="#">Dashboard</a>
                       </MDBBreadcrumbItem>
                     </Link>
-                    <Link to={"/AddPost"}>
+                    <Link to={"/Test"}>
                       <MDBBreadcrumbItem>
-                        <a href="#">Add New Post</a>
+                        <a href="#" onClick={()=>{
+                          // TODO
+                          setCentredModal(!centredModal)
+                        }}>Add New Post</a>
                       </MDBBreadcrumbItem>
                     </Link>
                     <Link to={"/Logout"}>

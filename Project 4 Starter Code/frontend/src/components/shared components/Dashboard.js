@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import "../../../src/App.css";
+import { useNavigate } from "react-router-dom";
+
 import {
   MDBBtn,
   MDBCard,
@@ -14,6 +16,8 @@ import {
 
 } from "mdb-react-ui-kit";
 const Dashboard = () => {
+    const navigate = useNavigate();
+  
   const { token, setToken, posts, setPosts } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -122,7 +126,7 @@ const Dashboard = () => {
                 <MDBCardBody>
                   <MDBCardTitle>{a.title}</MDBCardTitle>
                   <MDBCardText>{a.description}</MDBCardText>
-                  <MDBBtn href="#">More Details</MDBBtn>
+                  <MDBBtn href="#" color="warning" onClick={()=>{navigate("/Test")}}>More Details</MDBBtn>
                 </MDBCardBody>
               </MDBCard>
 
