@@ -20,6 +20,7 @@ function Login() {
   const [response, setResponse] = useState("");
   const [isError, setIsError] = useState(false);
   const [error, setError] = useState("");
+
   const userInfo = { email, password };
 
   const changeEmail = (e) => {
@@ -43,6 +44,7 @@ function Login() {
         console.log(res);
         setToken(res.data.token);
         localStorage.setItem("token", res.data.token);
+
         setIsError(false);
       })
       .catch((err) => {
@@ -53,7 +55,8 @@ function Login() {
       });
   };
   return (
-    <MDBContainer className="my-5 gradient-form LgContainer">
+    <div style={{height:"700px"}}>
+    <MDBContainer className="my-5 gradient-form ">
       <MDBRow>
         <MDBCol col="6" className="mb-5">
           <div className="d-flex flex-column ms-5">
@@ -128,18 +131,11 @@ function Login() {
                 effortlessly in one place.
               </p>
             </div>
-            {/* <MDBFooter bgColor='light' className='text-center text-lg-left'>
-      <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        &copy; {new Date().getFullYear()} Copyright:{' '}
-        <a className='text-dark' href='https://mdbootstrap.com/'>
-          MDBootstrap.com
-        </a>
-      </div>
-    </MDBFooter> */}
           </div>
         </MDBCol>
       </MDBRow>
     </MDBContainer>
+    </div>
   );
 }
 

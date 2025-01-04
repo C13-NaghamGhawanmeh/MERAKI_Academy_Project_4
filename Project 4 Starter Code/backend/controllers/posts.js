@@ -32,6 +32,7 @@ const createNewPost = (req, res) => {
 };
 const getAllPosts = (req, res) => {
   const userId = req.token.userId;
+  const userName= req.token.author;
 
   postModel
     .find({})
@@ -42,6 +43,7 @@ const getAllPosts = (req, res) => {
         message: "All the posts",
         userId: userId,
         posts: result,
+        userName:userName
       });
     })
     .catch((err) => {

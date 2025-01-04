@@ -57,11 +57,16 @@ body {
   height: 200px;
 }
 
-@media (min-width: 768px) {
+ @media (min-width: 768px) {
   .gradient-form {
     height: 100vh !important;
   }
-}
+} 
+/* @media (min-width: 768px) {
+  .gradient-form {
+    height:20vh !important
+  }
+} */
 @media (min-width: 769px) {
   .gradient-custom-2 {
     border-top-right-radius: 0.3rem;
@@ -85,13 +90,18 @@ body {
 .DashPost{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-left: 32px;
+  /* margin-right: 2px; */
+
 }
 
 .ModalInputs{
   display: flex;
   flex-direction: column;
   gap: 25px;
+  font-size: 18px;
+  font-family:Arial, Helvetica, sans-serif;
 }
-/* .LgContainer{
-  height: 700px;
-} */
+.LgContainer{
+  height: 200px;
+}

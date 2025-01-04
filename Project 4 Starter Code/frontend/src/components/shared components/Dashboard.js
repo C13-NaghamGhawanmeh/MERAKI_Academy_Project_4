@@ -12,13 +12,11 @@ import {
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
- 
-
 } from "mdb-react-ui-kit";
 const Dashboard = () => {
-    const navigate = useNavigate();
-  
-  const { token, setToken, posts, setPosts } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const { token, setToken, posts, setPosts ,userName, setuserName} = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [media, setMedia] = useState("");
@@ -27,6 +25,7 @@ const Dashboard = () => {
 
   const [isClickedToUpdate, setIsClickedToUpdate] = useState(false);
   const [isCommented, setIsCommented] = useState(false);
+
   const postInfo = { title, description, media };
   const commentInfo = { comment };
   const headers = {
@@ -39,6 +38,8 @@ const Dashboard = () => {
         console.log(res);
         setPosts(res.data.posts);
         setUserId(res.data.userId);
+        setuserName(res.data.userName)
+
         console.log("res.data.posts", res.data.posts);
       })
       .catch((err) => {
@@ -110,7 +111,7 @@ const Dashboard = () => {
                     return (
                       <MDBCardImage
                         src={p}
-                        style={{ width: "400px" }}
+                        style={{ width: "400px", height: "250px" }}
                         fluid
                         alt="..."
                       />
@@ -126,7 +127,15 @@ const Dashboard = () => {
                 <MDBCardBody>
                   <MDBCardTitle>{a.title}</MDBCardTitle>
                   <MDBCardText>{a.description}</MDBCardText>
-                  <MDBBtn href="#" color="warning" onClick={()=>{navigate("/Test")}}>More Details</MDBBtn>
+                  <MDBBtn
+                    href="#"
+                    color="warning"
+                    onClick={() => {
+                      navigate("/Test");
+                    }}
+                  >
+                    More Details
+                  </MDBBtn>
                 </MDBCardBody>
               </MDBCard>
 

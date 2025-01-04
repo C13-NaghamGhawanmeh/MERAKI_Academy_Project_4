@@ -15,13 +15,15 @@ const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isLogged, setIsLogged] = useState(localStorage.getItem("isLogged"));
   const [centredModal, setCentredModal] = useState(false);
+  const [userName, setuserName] = useState("");
+
   const [isClickedToAddPost, setisClickedToAddPost] = useState(false)
 
   const [posts, setPosts] = useState();
 
   return (
     <UserContext.Provider
-      value={{ token, setToken, isLogged, setIsLogged, posts, setPosts ,centredModal, setCentredModal,isClickedToAddPost, setisClickedToAddPost}}
+      value={{ token, setToken, isLogged, setIsLogged, posts, setPosts ,centredModal, setCentredModal,isClickedToAddPost, setisClickedToAddPost,userName, setuserName}}
     >
       <div className="App">
         {/* <Test/> */}

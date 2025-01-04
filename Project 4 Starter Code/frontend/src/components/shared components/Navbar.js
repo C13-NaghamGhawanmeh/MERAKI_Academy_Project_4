@@ -23,7 +23,7 @@ import {
 
 } from "mdb-react-ui-kit";
 const Navbar = () => {
-  const { isLogged, token , centredModal,setCentredModal,isClickedToAddPost, setisClickedToAddPost } = useContext(UserContext);
+  const { isLogged, token , centredModal,setCentredModal,isClickedToAddPost, setisClickedToAddPost,userName, setuserName } = useContext(UserContext);
 // const add = ()=>{
 //   setCentredModal(!centredModal)
 //                           <Test />
@@ -49,7 +49,7 @@ const Navbar = () => {
                   <MDBBreadcrumb className="BreadcrumbItem">
                     <Link to={"/Dashboard"}>
                       <MDBBreadcrumbItem>
-                        <a href="#">Dashboard</a>
+                        <a href="#" style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif"}}>Dashboard</a>
                       </MDBBreadcrumbItem>
                     </Link>
                     {/* <Link to={"/Test"}> */}
@@ -60,13 +60,13 @@ const Navbar = () => {
                           setCentredModal(!centredModal)
                           setisClickedToAddPost(true)
                         
-                        }}>Add New Post</a>
+                        }} style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif"}}>Add New Post</a>
                       </MDBBreadcrumbItem>
                       {isClickedToAddPost&& <Test/>}
                     {/* </Link> */}
                     <Link to={"/Logout"}>
                       <MDBBreadcrumbItem>
-                        <a href="#">Logout</a>
+                        <a href="#" style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif",fontWeight:"bold"}}>Logout  ({userName})</a>
                       </MDBBreadcrumbItem>
                     </Link>
                   </MDBBreadcrumb>
@@ -78,12 +78,12 @@ const Navbar = () => {
                   <MDBBreadcrumb className="BreadcrumbItem">
                     <Link to={"/Login"}>
                       <MDBBreadcrumbItem>
-                        <a href="#">Login</a>
+                        <a href="#" style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif"}}>Login</a>
                       </MDBBreadcrumbItem>
                     </Link>
                     <Link to={"/Register"}>
                       <MDBBreadcrumbItem>
-                        <a href="#">Register</a>
+                        <a href="#" style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif"}}>Register</a>
                       </MDBBreadcrumbItem>
                     </Link>
                   </MDBBreadcrumb>

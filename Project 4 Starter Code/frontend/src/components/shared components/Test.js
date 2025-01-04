@@ -41,7 +41,6 @@ export default function App() {
   //   const toggleOpen = () => setCentredModal(!centredModal);
   const addPost = () => {
     // setIsClickedToAddPost(false)
-
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -74,7 +73,7 @@ export default function App() {
         <MDBModalDialog centered>
           <MDBModalContent>
             <MDBModalHeader>
-              <MDBModalTitle>Add Post</MDBModalTitle>
+              <MDBModalTitle style={{fontSize:"20px" ,fontFamily:"Arial, Helvetica, sans-serif"}}>Add Post</MDBModalTitle>
               <MDBBtn
                 className="btn-close"
                 color="none"
@@ -115,21 +114,21 @@ export default function App() {
                     valuemax={100}
                   />
                 </MDBProgress>
-                <p className="success2">{response}</p>
+                <p className="success2" style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif"}}>{response}</p>
               </>
             )}
 
-            {isError && <p className="failed2">{error}</p>}
+            {isError && <p className="failed2" style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif"}}>{error}</p>}
             <MDBModalFooter>
               <MDBBtn
-                color="secondary"
+                color="secondary" style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif"}}
                 onClick={() => {
                   setCentredModal(!centredModal);
                 }}
               >
                 Close
               </MDBBtn>
-              <MDBBtn color="warning" onClick={addPost}>
+              <MDBBtn style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif"}} color="warning" onClick={addPost}>
                 Add Post
               </MDBBtn>
             </MDBModalFooter>
