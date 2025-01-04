@@ -14,10 +14,10 @@ import {
   MDBProgressBar,
 } from "mdb-react-ui-kit";
 import { UserContext } from "../../App";
-import axios from "axios";
+import axios, { isCancel } from "axios";
 
 export default function App() {
-  const { token, setToken } = useContext(UserContext);
+  const { token, setToken ,isClickedToAddPost, setIsClickedToAddPost, centredModal, setCentredModal} = useContext(UserContext);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -27,7 +27,6 @@ export default function App() {
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
   const postInfo = { title, description, media };
-  const { centredModal, setCentredModal } = useContext(UserContext);
   const changeTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -41,7 +40,8 @@ export default function App() {
 
   //   const toggleOpen = () => setCentredModal(!centredModal);
   const addPost = () => {
-    setIsCreated(false);
+    // setIsClickedToAddPost(false)
+
     const headers = {
       Authorization: `Bearer ${token}`,
     };
@@ -66,8 +66,7 @@ export default function App() {
   return (
     <>
       {/* <MDBBtn onClick={toggleOpen}>Vertically centered modal</MDBBtn> */}
-
-      <MDBModal
+      {isClickedToAddPost&& <MDBModal 
         tabIndex="-1"
         open={centredModal}
         onClose={() => setCentredModal(false)}
@@ -104,16 +103,22 @@ export default function App() {
                 onChange={changeUrl}
               />
             </MDBModalBody>
-            <MDBProgress>
-              <MDBProgressBar
-               striped animated
-                bgColor="warning"
-                width="25"
-                valuemin={0}
-                valuemax={100}
-              />
-            </MDBProgress>
-            {IsCreated && <p className="success2">{response}</p>}
+            {IsCreated && (
+              <>
+                <MDBProgress>
+                  <MDBProgressBar
+                    striped
+                    animated
+                    bgColor="warning"
+                    width="100"
+                    valuemin={0}
+                    valuemax={100}
+                  />
+                </MDBProgress>
+                <p className="success2">{response}</p>
+              </>
+            )}
+
             {isError && <p className="failed2">{error}</p>}
             <MDBModalFooter>
               <MDBBtn
@@ -130,7 +135,8 @@ export default function App() {
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
-      </MDBModal>
+      </MDBModal>}
+      
     </>
   );
 }

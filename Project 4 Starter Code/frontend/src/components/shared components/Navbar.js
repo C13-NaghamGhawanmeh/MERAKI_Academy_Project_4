@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // import "./style.css";
 import { useContext } from "react";
 import { UserContext } from "../../App";
+import Test from "./Test"
 import {
   MDBBreadcrumb,
   MDBBreadcrumbItem,
@@ -22,8 +23,11 @@ import {
 
 } from "mdb-react-ui-kit";
 const Navbar = () => {
-  const { isLogged, token , centredModal,setCentredModal } = useContext(UserContext);
-
+  const { isLogged, token , centredModal,setCentredModal,isClickedToAddPost, setisClickedToAddPost } = useContext(UserContext);
+// const add = ()=>{
+//   setCentredModal(!centredModal)
+//                           <Test />
+// }
   return (
     <>
       <MDBNavbar sticky light bgColor="light">
@@ -48,14 +52,18 @@ const Navbar = () => {
                         <a href="#">Dashboard</a>
                       </MDBBreadcrumbItem>
                     </Link>
-                    <Link to={"/Test"}>
+                    {/* <Link to={"/Test"}> */}
                       <MDBBreadcrumbItem>
                         <a href="#" onClick={()=>{
                           // TODO
+                         
                           setCentredModal(!centredModal)
+                          setisClickedToAddPost(true)
+                        
                         }}>Add New Post</a>
                       </MDBBreadcrumbItem>
-                    </Link>
+                      {isClickedToAddPost&& <Test/>}
+                    {/* </Link> */}
                     <Link to={"/Logout"}>
                       <MDBBreadcrumbItem>
                         <a href="#">Logout</a>

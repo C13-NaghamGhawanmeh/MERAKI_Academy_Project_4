@@ -53,7 +53,7 @@ function Login() {
       });
   };
   return (
-    <MDBContainer className="my-5 gradient-form">
+    <MDBContainer className="my-5 gradient-form LgContainer">
       <MDBRow>
         <MDBCol col="6" className="mb-5">
           <div className="d-flex flex-column ms-5">
