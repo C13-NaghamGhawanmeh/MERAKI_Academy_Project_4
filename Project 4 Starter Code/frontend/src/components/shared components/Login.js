@@ -5,6 +5,7 @@ import {
   MDBRow,
   MDBCol,
   MDBInput,
+  MDBFooter,
 } from "mdb-react-ui-kit";
 import axios from "axios";
 import { useState } from "react";
@@ -98,7 +99,7 @@ function Login() {
                 <MDBBtn
                   outline
                   className="mx-2"
-                  color="danger"
+                  color="warning"
                   onClick={() => {
                     navigate("/Register");
                   }}
@@ -127,6 +128,14 @@ function Login() {
                 effortlessly in one place.
               </p>
             </div>
+            {/* <MDBFooter bgColor='light' className='text-center text-lg-left'>
+      <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+        &copy; {new Date().getFullYear()} Copyright:{' '}
+        <a className='text-dark' href='https://mdbootstrap.com/'>
+          MDBootstrap.com
+        </a>
+      </div>
+    </MDBFooter> */}
           </div>
         </MDBCol>
       </MDBRow>

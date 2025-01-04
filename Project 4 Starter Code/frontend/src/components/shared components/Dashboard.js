@@ -2,6 +2,17 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import "../../../src/App.css";
+import {
+  MDBBtn,
+  MDBCard,
+  MDBRipple,
+  MDBCardImage,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+ 
+
+} from "mdb-react-ui-kit";
 const Dashboard = () => {
   const { token, setToken, posts, setPosts } = useContext(UserContext);
   const [title, setTitle] = useState("");
@@ -23,7 +34,7 @@ const Dashboard = () => {
       .then((res) => {
         console.log(res);
         setPosts(res.data.posts);
-        setUserId(res.data.userId)
+        setUserId(res.data.userId);
         console.log("res.data.posts", res.data.posts);
       })
       .catch((err) => {
@@ -61,16 +72,15 @@ const Dashboard = () => {
       });
   };
   const addComment = (id) => {
-    setIsCommented(true)
+    setIsCommented(true);
 
     axios
       .post(`http://localhost:5000/posts/${id}/comments/`, commentInfo, {
         headers,
       })
       .then((res) => {
-      setIsCommented(false)
-      getAllPosts()
-
+        setIsCommented(false);
+        getAllPosts();
       })
       .catch((err) => {
         console.log(err);
@@ -81,95 +91,47 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div>
+    <div className="DashPost">
       {posts?.map((a, index) => {
         return (
           <div className="posts" key={index}>
             <div className="desc">
-              <div>title : {a.title}</div>
+              <MDBCard className="HomeCards">
+                <MDBRipple
+                  rippleColor="light"
+                  rippleTag="div"
+                  className="bg-image hover-overlay"
+                >
+                  {a.media.map((p, index) => {
+                    return (
+                      <MDBCardImage
+                        src={p}
+                        style={{ width: "400px" }}
+                        fluid
+                        alt="..."
+                      />
+                    );
+                  })}
+                  <a>
+                    <div
+                      className="mask"
+                      style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
+                    ></div>
+                  </a>
+                </MDBRipple>
+                <MDBCardBody>
+                  <MDBCardTitle>{a.title}</MDBCardTitle>
+                  <MDBCardText>{a.description}</MDBCardText>
+                  <MDBBtn href="#">More Details</MDBBtn>
+                </MDBCardBody>
+              </MDBCard>
+
+              {/*  */}
+              {/* <div>title : {a.title}</div>
               <div>description : {a.description}</div>
               {a.media.map((p, index) => {
                 return <img src={p} />;
-              })}
-              {a.comments?.map((c,index)=>{
-                return <p>{c.comment}</p>
-              })}
-
-              {userId===a.author && (<> <button
-                id={a._id}
-                className="Btn4"
-                onClick={(e) => {
-                  deletePostById(e.target.id);
-                }}
-              >
-                delete
-              </button>
-               
-              {isClickedToUpdate || (
-                <button
-                  id={a._id}
-                  className="Btn5"
-                  onClick={(e) => {
-                    <input>here</input>;
-                    setIsClickedToUpdate(true);
-                  }}
-                >
-                  update
-                </button>
-              )}
-{isClickedToUpdate && (
-                <>
-                  <input
-                    placeholder="title"
-                    onChange={(e) => {
-                      setTitle(e.target.value);
-                    }}
-                  />
-                  <textarea
-                    placeholder="description"
-                    onChange={(e) => {
-                      setDescription(e.target.value);
-                    }}
-                  ></textarea>
-                  <input
-                    placeholder="media"
-                    onChange={(e) => {
-                      setMedia(e.target.value);
-                    }}
-                  />
-
-                  <button
-                    id={a._id}
-                    onClick={(e) => {
-                      updatePostById(e.target.id);
-                      setIsClickedToUpdate(false);
-                    }}
-                  >
-                    click
-                  </button>
-                </>
-              )}
-
-              </>)}
-            
-
-              
-              <input
-                placeholder="Comment"
-                onChange={(e) => {
-                  setcomment(e.target.value);
-                }}
-              />
-              <button
-                id={a._id}
-                onClick={(e) => {
-                  addComment(e.target.id);
-                  setIsCommented(true);
-                }}
-              >
-                add Comment
-              </button>
-              {/* {isCommented && <p>{comment}</p>} */}
+              })} */}
             </div>
           </div>
         );
