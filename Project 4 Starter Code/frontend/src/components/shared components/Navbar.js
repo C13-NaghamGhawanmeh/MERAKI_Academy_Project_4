@@ -30,7 +30,7 @@ const Navbar = () => {
 // }
   return (
     <>
-      <MDBNavbar sticky light bgColor="light">
+      <MDBNavbar sticky light bgColor="white">
         <MDBContainer fluid>
           <div className="LogoBrand">
           <MDBNavbarBrand className="Brand" href="#">

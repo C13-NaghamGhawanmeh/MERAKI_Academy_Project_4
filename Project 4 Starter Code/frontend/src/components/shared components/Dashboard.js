@@ -111,7 +111,7 @@ const Dashboard = () => {
                     return (
                       <MDBCardImage
                         src={p}
-                        style={{ width: "400px", height: "250px" }}
+                        style={{ width: "400px", height: "250px"}}
                         fluid
                         alt="..."
                       />
