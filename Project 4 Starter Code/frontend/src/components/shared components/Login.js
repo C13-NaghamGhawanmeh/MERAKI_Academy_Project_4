@@ -58,9 +58,9 @@ function Login() {
     <div style={{height:"700px"}}>
     <MDBContainer className="my-5 gradient-form ">
       <MDBRow>
-        <MDBCol col="6" className="mb-5">
-          <div className="d-flex flex-column ms-5">
-            <div className="text-center">
+        <MDBCol col="6" className="mb-5" >
+          <div className="d-flex flex-column ms-5" >
+            <div className="text-center" >
               <img
                 src="https://static.vecteezy.com/system/resources/previews/000/619/126/non_2x/vector-house-home-buildings-logo-icons-template.jpg"
                 style={{ width: "300px" }}

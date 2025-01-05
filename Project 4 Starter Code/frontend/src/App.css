@@ -57,11 +57,11 @@ body {
   height: 200px;
 }
 
- @media (min-width: 768px) {
+@media (min-width: 768px) {
   .gradient-form {
     height: 100vh !important;
   }
-} 
+}
 /* @media (min-width: 768px) {
   .gradient-form {
     height:20vh !important
@@ -81,12 +81,11 @@ body {
   margin-top: 70px;
   margin-left: 20px;
   border: 5px solid rgb(244, 244, 239);
-  border-radius: 15px ;
+  border-radius: 15px;
 }
-.HomeCards:hover{
-  border: 8px solid rgb(244, 244, 239);
+.HomeCards:hover {
+  border: 8px solid rgb(244, 241, 239);
   border-radius: 18px;
-
 }
 .CardsContainer {
   display: flex;
@@ -94,21 +93,29 @@ body {
   justify-content: center;
   gap: 35px;
 }
-.DashPost{
+.DashPost {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   margin-left: 32px;
   /* margin-right: 2px; */
-
 }
 
-.ModalInputs{
+.ModalInputs {
   display: flex;
   flex-direction: column;
   gap: 25px;
   font-size: 18px;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
-.LgContainer{
+.LgContainer {
   height: 200px;
 }
+
+.Search {
+  margin-left: 150px;
+  margin-top: 20px;
+}
+.Input {
+  width: 350px !important;
+}
+
