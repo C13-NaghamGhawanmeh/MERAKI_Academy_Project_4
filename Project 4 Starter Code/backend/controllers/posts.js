@@ -32,7 +32,7 @@ const createNewPost = (req, res) => {
 };
 const getAllPosts = (req, res) => {
   const userId = req.token.userId;
-  const userName= req.token.author;
+  const userName = req.token.author;
 
   postModel
     .find({})
@@ -43,13 +43,34 @@ const getAllPosts = (req, res) => {
         message: "All the posts",
         userId: userId,
         posts: result,
-        userName:userName
+        userName: userName,
       });
     })
     .catch((err) => {
       res.status(500).json({
         success: false,
         message: "Server Error",
+        err: err.message,
+      });
+    });
+};
+
+const getPostById = (req, res) => {
+  const postId = req.params.id;
+  postModel
+    .find({ _id: postId })
+    .populate("comments")
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: "One Post",
+        post: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error ggg",
         err: err.message,
       });
     });
@@ -99,4 +120,10 @@ const updatePostById = (req, res) => {
     });
 };
 
-module.exports = { createNewPost, getAllPosts, deletePostById, updatePostById };
+module.exports = {
+  createNewPost,
+  getAllPosts,
+  deletePostById,
+  updatePostById,
+  getPostById,
+};

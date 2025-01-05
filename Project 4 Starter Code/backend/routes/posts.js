@@ -7,6 +7,7 @@ const {
   getAllPosts,
   deletePostById,
   updatePostById,
+  getPostById,
 } = require("../controllers/posts");
 
 const { createNewComment } = require("./../controllers/comments");
@@ -20,6 +21,7 @@ postsRouter.post(
   createNewPost
 );
 postsRouter.get("/getAllPosts", authentication, getAllPosts);
+postsRouter.get("/getPostById/:id", authentication, getPostById);
 postsRouter.delete("/:id/delete", deletePostById);
 postsRouter.put("/:id/update", updatePostById);
 postsRouter.post(
