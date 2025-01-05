@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // import "./style.css";
 import { useContext } from "react";
 import { UserContext } from "../../App";
-import Test from "./Test";
+import AddPost from "./AddPost";
 import {
   MDBBreadcrumb,
   MDBBreadcrumbItem,
@@ -83,7 +83,7 @@ const Navbar = () => {
                             fontFamily: "Arial, Helvetica, sans-serif",
                           }}
                         >
-                          Dashboard
+                          Home
                         </a>
                       </MDBBreadcrumbItem>
                     </Link>
@@ -105,7 +105,7 @@ const Navbar = () => {
                         Add New Post
                       </a>
                     </MDBBreadcrumbItem>
-                    {isClickedToAddPost && <Test />}
+                    {isClickedToAddPost && <AddPost />}
                     {/* </Link> */}
 
                     <MDBBreadcrumbItem>

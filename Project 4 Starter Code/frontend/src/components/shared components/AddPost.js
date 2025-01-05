@@ -1,19 +1,32 @@
-import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
+import {
+  MDBBtn,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBModalBody,
+  MDBModalFooter,
+  MDBInput,
+  MDBTextArea,
+  MDBProgress,
+  MDBProgressBar,
+} from "mdb-react-ui-kit";
 import { UserContext } from "../../App";
+import axios from "axios";
 
-const AddPost = () => {
-  const { token, setToken } = useContext(UserContext);
+export default function App() {
+  const { token, setToken ,isClickedToAddPost, setIsClickedToAddPost, centredModal, setCentredModal} = useContext(UserContext);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [media, setMedia] = useState("");
-  const [IsCreated, setIsCreated] = useState(false)
-  const [isError, setIsError] = useState(false)
-  const [response, setResponse] = useState("")
-  const [error, setError] = useState("")
-  const postInfo = { title, description ,media};
-
+  const [IsCreated, setIsCreated] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [response, setResponse] = useState("");
+  const [error, setError] = useState("");
+  const postInfo = { title, description, media };
   const changeTitle = (e) => {
     setTitle(e.target.value);
   };
@@ -23,49 +36,106 @@ const AddPost = () => {
   const changeUrl = (e) => {
     setMedia(e.target.value);
   };
-  const addPost = ()=>{
-    setIsCreated(false)
+  //   const [centredModal, setCentredModal] = useState(false);
+
+  //   const toggleOpen = () => setCentredModal(!centredModal);
+  const addPost = () => {
+    // setIsClickedToAddPost(false)
     const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-    
+      Authorization: `Bearer ${token}`,
+    };
+
     axios
-    .post("http://localhost:5000/posts/createPost",postInfo , {headers})
-    .then((res)=>{
+      .post("http://localhost:5000/posts/createPost", postInfo, { headers })
+      .then((res) => {
         // const data = res
-        setResponse(res.data.message)
-        setIsCreated(true)
-        setIsError(false)
+        setResponse(res.data.message);
+        setIsCreated(true);
+        setIsError(false);
         console.log(res);
-        
-    })
-    .catch((err)=>{
+      })
+      .catch((err) => {
         console.log(err);
-        
-    setIsCreated(false)
-    setIsError(true)
-    setError(err.response.data.message)
 
-    })
-  }
+        setIsCreated(false);
+        setIsError(true);
+        setError(err.response.data.message);
+      });
+  };
   return (
-    <div className="Post">
-      <input className="input3" placeholder="Title" onChange={changeTitle} />
-      <textarea
-        className="textarea1"
-        placeholder="Description"
-        onChange={changeDescription}
-      ></textarea>
-      <input
-        className="input3"
-        placeholder="URL images/video"
-        onChange={changeUrl}
-      />
-      <button className="Btn3" onClick={addPost}>Add Post</button>
-        {IsCreated&&<p className="success2">{response}</p>}
-        {isError&&<p className="failed2">{error}</p>}
-    </div>
-  );
-};
+    <>
+      {/* <MDBBtn onClick={toggleOpen}>Vertically centered modal</MDBBtn> */}
+      {isClickedToAddPost&& <MDBModal 
+        tabIndex="-1"
+        open={centredModal}
+        onClose={() => setCentredModal(false)}
+      >
+        <MDBModalDialog centered>
+          <MDBModalContent>
+            <MDBModalHeader>
+              <MDBModalTitle style={{fontSize:"20px" ,fontFamily:"Arial, Helvetica, sans-serif"}}>Add Post</MDBModalTitle>
+              <MDBBtn
+                className="btn-close"
+                color="none"
+                onClick={() => {
+                  setCentredModal(!centredModal);
+                }}
+              ></MDBBtn>
+            </MDBModalHeader>
+            <MDBModalBody className="ModalInputs">
+              <MDBInput
+                label="Title"
+                id="form1"
+                type="text"
+                onChange={changeTitle}
+              />
+              <MDBTextArea
+                label="Description"
+                id="textAreaExample"
+                rows="{4}"
+                onChange={changeDescription}
+              />
+              <MDBInput
+                label="Images"
+                id="typeURL"
+                type="url"
+                onChange={changeUrl}
+              />
+            </MDBModalBody>
+            {IsCreated && (
+              <>
+                <MDBProgress>
+                  <MDBProgressBar
+                    striped
+                    animated
+                    bgColor="warning"
+                    width="100"
+                    valuemin={0}
+                    valuemax={100}
+                  />
+                </MDBProgress>
+                <p className="success2" style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif"}}>{response}</p>
+              </>
+            )}
 
-export default AddPost;
+            {isError && <p className="failed2" style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif"}}>{error}</p>}
+            <MDBModalFooter>
+              <MDBBtn
+                color="secondary" style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif"}}
+                onClick={() => {
+                  setCentredModal(!centredModal);
+                }}
+              >
+                Close
+              </MDBBtn>
+              <MDBBtn style={{fontSize:"18px" ,fontFamily:"Arial, Helvetica, sans-serif"}} color="warning" onClick={addPost}>
+                Add Post
+              </MDBBtn>
+            </MDBModalFooter>
+          </MDBModalContent>
+        </MDBModalDialog>
+      </MDBModal>}
+      
+    </>
+  );
+}
