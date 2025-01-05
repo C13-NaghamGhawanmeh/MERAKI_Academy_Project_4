@@ -35,7 +35,7 @@ const App = () => {
           <Route path="/AddPost" element={<AddPost />} />
           <Route path="/Logout" element={<Logout />} />
           <Route path="/Test" element={<Test />} />
-          <Route path="/Test/:a" element={<Test />} />
+          <Route path="/Test/:id" element={<Test />} />
         </Routes>
       </div>
     </UserContext.Provider>
