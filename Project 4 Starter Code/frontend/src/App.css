@@ -118,3 +118,16 @@ body {
 .Input {
   width: 350px !important;
 }
+.TextCard{
+  margin-top: 50px;
+  margin-left: 50px;
+  /* margin-right: 100px; */
+  width: 1300px;
+  /* height: 700px; */
+}
+.img-thumbnail{
+  height: 300px;
+  width: 400px;
+  margin-left: 50px;
+  /* justify-content: flex-start; */
+}

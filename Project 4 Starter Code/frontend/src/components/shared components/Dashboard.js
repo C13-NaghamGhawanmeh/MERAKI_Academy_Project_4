@@ -128,10 +128,11 @@ const Dashboard = () => {
                   <MDBCardTitle>{a.title}</MDBCardTitle>
                   <MDBCardText>{a.description}</MDBCardText>
                   <MDBBtn
+                  id={a._id}
                     href="#"
                     color="warning"
-                    onClick={() => {
-                      navigate("/Test");
+                    onClick={(e) => {
+                      navigate(`/Test/${e.target.id}`);
                     }}
                   >
                     More Details
