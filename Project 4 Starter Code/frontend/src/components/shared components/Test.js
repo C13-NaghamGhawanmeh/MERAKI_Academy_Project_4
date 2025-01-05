@@ -1,10 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
-import { MDBCard, MDBCardBody, MDBRipple } from "mdb-react-ui-kit";
+import {
+    MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBListGroup,
+  MDBListGroupItem,
+  MDBRipple,
+} from "mdb-react-ui-kit";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../App";
 const App = () => {
-  const { token, setToken } = useContext(UserContext);
+  const { token, setToken, userId, setUserId } = useContext(UserContext);
   const [post, setpost] = useState("");
   const { id } = useParams();
   console.log("kkkkkkkk", id);
@@ -32,18 +39,45 @@ const App = () => {
   }, []);
   return (
     <MDBCard className="TextCard">
-      <MDBCardBody>{post.title}</MDBCardBody>
+      <MDBCardBody>
+        <h2 className="text-muted">{post.title}</h2>
+        <p>{post.description}</p>
+      </MDBCardBody>
       <div className="imgshow">
+        {post.media?.map((p, index) => {
+          return (
+            <MDBRipple rippleTag="a">
+              <img
+                src={p}
+                className="img-fluid rounded"
+                style={{
+                  width: "350px",
+                  height: "200px",
+                  border: "3px solid lightGrey",
+                }}
+                alt="example"
+              />
+            </MDBRipple>
+          );
+        })}
+      </div>
+      <MDBListGroup flush style={{ marginTop: "20px" }}>
+        {post.comments?.map((c, index) => {
+          return <MDBListGroupItem>{c.comment}</MDBListGroupItem>;
+        })}
 
-      {post.media?.map((p, index) => {
-        return (
-          <MDBRipple  rippleTag='a'  >
-            <img src={p} className="img-fluid rounded" style={{width:"350px",height:"200px"}} alt="example" />
-          </MDBRipple>
-        );
-      })}
-                </div>
+        {userId === post.author && (
+          <>
+            <MDBBtn outline className="mx-2" color="danger">
+              Delete
+            </MDBBtn>
+          </>
+        )}
+        <MDBListGroupItem>Dapibus ac facilisis in</MDBListGroupItem>
+        <MDBListGroupItem>Vestibulum at eros</MDBListGroupItem>
+      </MDBListGroup>
 
+      {/* <p>{post.description}</p> */}
     </MDBCard>
   );
 };

@@ -16,12 +16,11 @@ import {
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const { token, setToken, posts, setPosts ,userName, setuserName} = useContext(UserContext);
+  const { token, setToken, posts, setPosts ,userName, setuserName,userId, setUserId} = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [media, setMedia] = useState("");
   const [comment, setcomment] = useState("");
-  const [userId, setUserId] = useState("");
 
   const [isClickedToUpdate, setIsClickedToUpdate] = useState(false);
   const [isCommented, setIsCommented] = useState(false);
