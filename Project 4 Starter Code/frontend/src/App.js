@@ -18,13 +18,31 @@ const App = () => {
   const [userName, setuserName] = useState("");
   const [userId, setUserId] = useState("");
 
-  const [isClickedToAddPost, setisClickedToAddPost] = useState(false)
+  const [isClickedToAddPost, setisClickedToAddPost] = useState(false);
 
   const [posts, setPosts] = useState();
+  const [isClickedToUpdate, setIsClickedToUpdate] = useState(false);
 
   return (
     <UserContext.Provider
-      value={{ token, setToken, isLogged, setIsLogged, posts, setPosts ,centredModal, setCentredModal,isClickedToAddPost, setisClickedToAddPost,userName, setuserName,userId, setUserId}}
+      value={{
+        token,
+        setToken,
+        isLogged,
+        setIsLogged,
+        posts,
+        setPosts,
+        centredModal,
+        setCentredModal,
+        isClickedToAddPost,
+        setisClickedToAddPost,
+        userName,
+        setuserName,
+        userId,
+        setUserId,
+        isClickedToUpdate,
+        setIsClickedToUpdate,
+      }}
     >
       <div className="App">
         {/* <Test/> */}
