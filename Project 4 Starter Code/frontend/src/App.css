@@ -121,9 +121,15 @@ body {
 .TextCard {
   margin-top: 50px;
   margin-left: 50px;
-  /* margin-right: 100px; */
   width: 1300px;
-  /* max-height: 1000px; */
+
+
+  /* background-color: #f6be79; */
+}
+.CardBody{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 /* .img-thumbnail{
   height: 300px;
@@ -141,3 +147,8 @@ gap: 50px;
 flex-direction: row;
 gap: 100px;
 } */
+ .photo{
+  width: 1100px;
+  height: max-content;
+ }
+ 

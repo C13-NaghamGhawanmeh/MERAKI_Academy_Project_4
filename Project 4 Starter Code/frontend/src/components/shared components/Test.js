@@ -6,11 +6,21 @@ import {
   MDBListGroup,
   MDBListGroupItem,
   MDBRipple,
+  MDBContainer,
+  MDBCol,
+  MDBRow,
+  MDBModal,
+  MDBModalBody,
+  MDBModalFooter,
+  MDBModalDialog,
+  MDBModalContent,
 } from "mdb-react-ui-kit";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../App";
 const App = () => {
+  const [modal1, setModal1] = useState(false);
+
   const {
     token,
     setToken,
@@ -73,6 +83,7 @@ const App = () => {
           return p;
         });
         setPosts(post);
+        getPostById();
         // getAllPosts();
       })
       .catch((err) => {
@@ -88,10 +99,10 @@ const App = () => {
       })
       .then((res) => {
         setIsCommented(false);
-        const post = post.map((p,index)=>{
-            return p
-        })
-        setPosts(post)
+        const post = post.map((p, index) => {
+          return p;
+        });
+        setPosts(post);
         // getAllPosts();
       })
       .catch((err) => {
@@ -102,106 +113,61 @@ const App = () => {
     getPostById();
   }, []);
   return (
-    <MDBCard className="TextCard">
-      <MDBCardBody>
-        <h2 className="text-muted">{post.title}</h2>
-        <p>{post.description}</p>
-      </MDBCardBody>
-      <div className="imgshow">
-        {post.media?.map((p, index) => {
-          return (
-            <MDBRipple rippleTag="a">
-              <img
-                src={p}
-                className="img-fluid rounded"
-                style={{
-                  width: "350px",
-                  height: "200px",
-                  border: "3px solid lightGrey",
-                }}
-                alt="example"
-              />
-            </MDBRipple>
-          );
-        })}
-      </div>
-      <MDBListGroup flush style={{ marginTop: "20px" }}>
-        {post.comments?.map((c, index) => {
-          return <MDBListGroupItem>{c.comment}</MDBListGroupItem>;
-        })}
+    <>
+      <MDBCard className="TextCard">
+        <MDBCardBody className="CardBody">
+          <h2
+            className="text-black font"
+            
+          >
+            {post.title}
+          </h2>
+          <p>{post.description}</p>
 
-        
-      </MDBListGroup>
-      {userId === post.author && (
-          <>
-            <MDBBtn outline className="mx-2" color="danger">
-              Delete
-            </MDBBtn>
-            {isClickedToUpdate || (
-              <MDBBtn
-                outline
-                className="mx-2"
-                color="danger"
-                id={post._id}
-                onClick={(e) => {
-                  <input>here</input>;
-                  setIsClickedToUpdate(true);
-                }}
-              >
-                Update
-              </MDBBtn>
-            )}
-            {isClickedToUpdate && (
-              <>
-                <input
-                  placeholder="title"
-                  onChange={(e) => {
-                    setTitle(e.target.value);
-                  }}
+          <MDBRow className="photo">
+            <MDBCol lg={4} md={12} className="mb-4 mb-lg-0">
+              <div className="bg-image hover-overlay ripple shadow-1-strong rounded">
+                <img
+                  src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1736174224/slwvy8jltdxmyo98ld7s.jpg"
+                  className="w-100"
                 />
-                <textarea
-                  placeholder="description"
-                  onChange={(e) => {
-                    setDescription(e.target.value);
-                  }}
-                ></textarea>
-                <input
-                  placeholder="media"
-                  onChange={(e) => {
-                    setMedia(e.target.value);
-                  }}
-                />
-
-                <button
-                  id={post._id}
-                  onClick={(e) => {
-                    updatePostById(e.target.id);
-                    setIsClickedToUpdate(false);
-                  }}
+                <a
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setModal1(!modal1)}
                 >
-                  click
-                </button>
-              </>
-            )}
-          </>
-        )}
-        <input
-          placeholder="Comment"
-          onChange={(e) => {
-            setcomment(e.target.value);
-          }}
-        />
-        <button
-          id={post._id}
-          onClick={(e) => {
-            addComment(e.target.id);
-            setIsCommented(true);
-          }}
-        >
-          add Comment
-        </button>
-      {/* <p>{post.description}</p> */}
-    </MDBCard>
+                  <div
+                    className="mask"
+                    style={{ backgroundColor: "rgba(251, 251, 251, 0.2)" }}
+                  ></div>
+                </a>
+              </div>
+            </MDBCol>
+          </MDBRow>
+
+          <MDBModal open={modal1} setShow={setModal1}>
+            <MDBModalDialog>
+              <MDBModalContent>
+                <MDBModalBody>
+                  <div className="ratio ratio-16x9">
+                    <img className="lg-image"
+                      src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1736174224/slwvy8jltdxmyo98ld7s.jpg"
+                      title="YouTube video"
+                      allowFullScreen
+                      style={{ width: "470px", height: "270px"}}
+                    ></img>
+                  </div>
+                </MDBModalBody>
+                <MDBModalFooter>
+                  <MDBBtn onClick={() => setModal1(!modal1)} color="secondary">
+                    Close
+                  </MDBBtn>
+                </MDBModalFooter>
+              </MDBModalContent>
+            </MDBModalDialog>
+          </MDBModal>
+        </MDBCardBody>
+      </MDBCard>
+    </>
   );
 };
 export default App;
