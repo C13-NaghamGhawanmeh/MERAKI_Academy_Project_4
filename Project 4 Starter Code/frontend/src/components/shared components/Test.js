@@ -14,6 +14,12 @@ import {
   MDBModalFooter,
   MDBModalDialog,
   MDBModalContent,
+  MDBInputGroup,
+  MDBIcon,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
 } from "mdb-react-ui-kit";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -116,55 +122,84 @@ const App = () => {
     <>
       <MDBCard className="TextCard">
         <MDBCardBody className="CardBody">
-          <h2
-            className="text-black font"
-            
-          >
-            {post.title}
-          </h2>
-          <p>{post.description}</p>
-
-          <MDBRow className="photo">
-            <MDBCol lg={4} md={12} className="mb-4 mb-lg-0">
-              <div className="bg-image hover-overlay ripple shadow-1-strong rounded">
-                <img
-                  src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1736174224/slwvy8jltdxmyo98ld7s.jpg"
-                  className="w-100"
-                />
-                <a
-                  style={{ cursor: "pointer" }}
-                  onClick={() => setModal1(!modal1)}
-                >
-                  <div
-                    className="mask"
-                    style={{ backgroundColor: "rgba(251, 251, 251, 0.2)" }}
-                  ></div>
-                </a>
+          <div>
+            <div className="head">
+              <div className="titleDesc">
+                <h2 className="text-black font">{post.title}</h2>
+                <p>{post.description}</p>
               </div>
-            </MDBCol>
-          </MDBRow>
+              <MDBDropdown className="Drop">
+                <MDBDropdownToggle color='warning'>Edit Post</MDBDropdownToggle>
+                <MDBDropdownMenu >
+                  <MDBDropdownItem link color="warning">Update</MDBDropdownItem>
+                  <MDBDropdownItem link  >Delete</MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
+            </div>
+            <MDBRow className="photo">
+              <MDBCol lg={4} md={12} className="mb-4 mb-lg-0">
+                <div className="bg-image hover-overlay ripple shadow-1-strong rounded">
+                  <img
+                    src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1736174224/slwvy8jltdxmyo98ld7s.jpg"
+                    className="w-100"
+                  />
+                  <a
+                    style={{ cursor: "pointer" }}
+                    onClick={() => setModal1(!modal1)}
+                  >
+                    <div
+                      className="mask"
+                      style={{ backgroundColor: "rgba(251, 251, 251, 0.2)" }}
+                    ></div>
+                  </a>
+                </div>
+              </MDBCol>
+            </MDBRow>
+            {/*  */}
 
-          <MDBModal open={modal1} setShow={setModal1}>
-            <MDBModalDialog>
-              <MDBModalContent>
-                <MDBModalBody>
-                  <div className="ratio ratio-16x9">
-                    <img className="lg-image"
-                      src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1736174224/slwvy8jltdxmyo98ld7s.jpg"
-                      title="YouTube video"
-                      allowFullScreen
-                      style={{ width: "470px", height: "270px"}}
-                    ></img>
-                  </div>
-                </MDBModalBody>
-                <MDBModalFooter>
-                  <MDBBtn onClick={() => setModal1(!modal1)} color="secondary">
-                    Close
-                  </MDBBtn>
-                </MDBModalFooter>
-              </MDBModalContent>
-            </MDBModalDialog>
-          </MDBModal>
+            <MDBModal open={modal1} setShow={setModal1}>
+              <MDBModalDialog>
+                <MDBModalContent>
+                  <MDBModalBody>
+                    <div
+                      className="ratio ratio-16x9"
+                      style={{ width: "1000px", height: "350px" }}
+                    >
+                      <img
+                        className="lg-image"
+                        src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1736174224/slwvy8jltdxmyo98ld7s.jpg"
+                        title="YouTube video"
+                        allowFullScreen
+                        style={{ width: "470px", height: "350px" }}
+                      ></img>
+                    </div>
+                  </MDBModalBody>
+                  <MDBModalFooter>
+                    <MDBBtn
+                      onClick={() => setModal1(!modal1)}
+                      color="secondary"
+                    >
+                      Close
+                    </MDBBtn>
+                  </MDBModalFooter>
+                </MDBModalContent>
+              </MDBModalDialog>
+            </MDBModal>
+            {/*  */}
+            <MDBInputGroup
+              className="mb-3"
+              style={{ width: "600px", marginTop: "40px" }}
+            >
+              <input
+                className="form-control"
+                placeholder="Comment as username"
+                type="text"
+              />
+              <MDBBtn outline color="warning">
+                Comment
+              </MDBBtn>
+            </MDBInputGroup>
+          </div>
         </MDBCardBody>
       </MDBCard>
     </>
