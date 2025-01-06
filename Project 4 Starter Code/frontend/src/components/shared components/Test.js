@@ -23,13 +23,18 @@ import {
   MDBDropdownItem,
   MDBModalHeader,
   MDBModalTitle,
+  MDBTextArea,
+  MDBProgress,
+  MDBProgressBar,
+  MDBInput,
+
 } from "mdb-react-ui-kit";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../App";
 const App = () => {
   const [modal1, setModal1] = useState(false);
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     token,
     setToken,
@@ -47,7 +52,10 @@ const navigate = useNavigate()
   const [description, setDescription] = useState("");
   const [media, setMedia] = useState("");
   const [comment, setComment] = useState("");
-
+  const [IsCreated, setIsCreated] = useState(false);
+    const [isError, setIsError] = useState(false);
+  const [response, setResponse] = useState("");
+  const [error, setError] = useState("");
   const [isCommented, setIsCommented] = useState(false);
   const postInfo = { title, description, media };
   const commentInfo = { comment };
@@ -57,7 +65,15 @@ const navigate = useNavigate()
     Authorization: `Bearer ${token}`,
   };
   const toggleOpen = () => setOptSmModal(!optSmModal);
-
+  const changeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const changeDescription = (e) => {
+    setDescription(e.target.value);
+  };
+  const changeUrl = (e) => {
+    setMedia(e.target.value);
+  };
   const getPostById = () => {
     axios
       .get(`http://localhost:5000/posts/getPostById/${id}`, { headers })
@@ -142,14 +158,19 @@ const navigate = useNavigate()
                       Edit Post
                     </MDBDropdownToggle>
                     <MDBDropdownMenu>
-                      <MDBDropdownItem>Update</MDBDropdownItem>
+                      <MDBDropdownItem
+                        id={post._id}
+                        onClick={()=>{setIsClickedToUpdate(true)}}
+                      >
+                        Update
+                      </MDBDropdownItem>
                       <MDBDropdownItem divider />
                       <MDBDropdownItem id={post._id} onClick={toggleOpen}>
                         Delete
                       </MDBDropdownItem>
                     </MDBDropdownMenu>
                   </MDBDropdown>
-
+                  {/* delete Modal */}
                   <MDBModal
                     open={optSmModal}
                     tabIndex="-1"
@@ -171,8 +192,8 @@ const navigate = useNavigate()
                             className="mx-1"
                             id={post._id}
                             onClick={(e) => {
-                              deletePostById(e.target.id)
-                              navigate("/Dashboard")
+                              deletePostById(e.target.id);
+                              navigate("/Dashboard");
                             }}
                           >
                             Delete
@@ -185,6 +206,117 @@ const navigate = useNavigate()
                             Close
                           </MDBBtn>
                         </MDBModalBody>
+                      </MDBModalContent>
+                    </MDBModalDialog>
+                  </MDBModal>
+                  {/* update Modal */}
+                  <MDBModal
+                    tabIndex="-1"
+                    open={isClickedToUpdate}
+                    onClose={() => setIsClickedToUpdate(false)}
+                  >
+                    <MDBModalDialog centered>
+                      <MDBModalContent>
+                        <MDBModalHeader>
+                          <MDBModalTitle
+                            style={{
+                              fontSize: "20px",
+                              fontFamily: "Arial, Helvetica, sans-serif",
+                            }}
+                          >
+                            Update Post
+                          </MDBModalTitle>
+                          <MDBBtn
+                            className="btn-close"
+                            color="none"
+                            onClick={() => {
+                              setIsClickedToUpdate(!isClickedToUpdate);
+                            }}
+                          ></MDBBtn>
+                        </MDBModalHeader>
+                        <MDBModalBody className="ModalInputs">
+                          <MDBInput
+                            label="Title"
+                            id="form1"
+                            type="text"
+                            onChange={changeTitle}
+                          />
+                          <MDBTextArea
+                            label="Description"
+                            id="textAreaExample"
+                            rows="{4}"
+                            onChange={changeDescription}
+                          />
+                          <MDBInput
+                            label="Images"
+                            id="typeURL"
+                            type="url"
+                            onChange={changeUrl}
+                          />
+                        </MDBModalBody>
+                        {IsCreated && (
+                          <>
+                            <MDBProgress>
+                              <MDBProgressBar
+                                striped
+                                animated
+                                bgColor="warning"
+                                width="100"
+                                valuemin={0}
+                                valuemax={100}
+                              />
+                            </MDBProgress>
+                            <p
+                              className="success2"
+                              style={{
+                                fontSize: "18px",
+                                fontFamily: "Arial, Helvetica, sans-serif",
+                              }}
+                            >
+                              {response}
+                            </p>
+                          </>
+                        )}
+
+                        {isError && (
+                          <p
+                            className="failed2"
+                            style={{
+                              fontSize: "18px",
+                              fontFamily: "Arial, Helvetica, sans-serif",
+                            }}
+                          >
+                            {error}
+                          </p>
+                        )}
+                        <MDBModalFooter>
+                          <MDBBtn
+                            color="secondary"
+                            style={{
+                              fontSize: "18px",
+                              fontFamily: "Arial, Helvetica, sans-serif",
+                            }}
+                            onClick={() => {
+                              setIsClickedToUpdate(!isClickedToUpdate);
+                            }}
+                          >
+                            Close
+                          </MDBBtn>
+                          <MDBBtn
+                          id={post._id}
+                            style={{
+                              fontSize: "18px",
+                              fontFamily: "Arial, Helvetica, sans-serif",
+                            }}
+                            color="warning"
+                            onClick={(e)=>{
+                              updatePostById(e.target.id)
+                              setIsClickedToUpdate(!isClickedToUpdate)
+                            }}
+                          >
+                            Update Post
+                          </MDBBtn>
+                        </MDBModalFooter>
                       </MDBModalContent>
                     </MDBModalDialog>
                   </MDBModal>
