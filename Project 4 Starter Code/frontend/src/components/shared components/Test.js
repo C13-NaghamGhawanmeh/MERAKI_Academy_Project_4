@@ -41,7 +41,7 @@ const App = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [media, setMedia] = useState("");
-  const [comment, setcomment] = useState("");
+  const [comment, setComment] = useState("");
 
   const [isCommented, setIsCommented] = useState(false);
   const postInfo = { title, description, media };
@@ -58,7 +58,7 @@ const App = () => {
         console.log("hello here", res);
         setPost(res.data.post[0]);
         //   setPosts(res.data.posts);
-          // setUserId(res.data.userId);
+        // setUserId(res.data.userId);
         //   setuserName(res.data.userName)
 
         console.log("res.data.post", res.data.post[0]);
@@ -92,26 +92,24 @@ const App = () => {
         getPostById();
         // getAllPosts();
         // console.log(post);
-        
       })
       .catch((err) => {
         console.log(err);
       });
   };
   const addComment = (id) => {
-    setIsCommented(true);
+    // setIsCommented(true);
 
     axios
       .post(`http://localhost:5000/posts/${id}/comments/`, commentInfo, {
         headers,
       })
       .then((res) => {
-        setIsCommented(false);
-        const post = post.map((p, index) => {
+        // setIsCommented(false);
+        const comment = post.comments.map((p, index) => {
           return p;
         });
-        setPosts(post);
-        // getAllPosts();
+        setComment(comment);
       })
       .catch((err) => {
         console.log(err);
@@ -119,7 +117,7 @@ const App = () => {
   };
   useEffect(() => {
     getPostById();
-  }, []);
+  }, [comment]);
   return (
     <>
       <MDBCard className="TextCard">
@@ -130,16 +128,22 @@ const App = () => {
                 <h2 className="text-black font">{post.title}</h2>
                 <p>{post.description}</p>
               </div>
-                {userId===post.author &&<> <MDBDropdown className="Drop">
-                  <MDBDropdownToggle color="warning">Edit Post</MDBDropdownToggle>
-                  <MDBDropdownMenu>
-                    <MDBDropdownItem link color="warning">
-                      Update
-                    </MDBDropdownItem>
-                    <MDBDropdownItem link>Delete</MDBDropdownItem>
-                  </MDBDropdownMenu>
-                </MDBDropdown></>}
-             
+              {userId === post.author && (
+                <>
+                  {" "}
+                  <MDBDropdown className="Drop">
+                    <MDBDropdownToggle color="warning">
+                      Edit Post
+                    </MDBDropdownToggle>
+                    <MDBDropdownMenu>
+                      <MDBDropdownItem link color="warning">
+                        Update
+                      </MDBDropdownItem>
+                      <MDBDropdownItem link>Delete</MDBDropdownItem>
+                    </MDBDropdownMenu>
+                  </MDBDropdown>
+                </>
+              )}
             </div>
 
             {post.media?.map((p, index) => {
@@ -161,11 +165,18 @@ const App = () => {
                 </MDBCol>
               );
             })}
-            {post.comments?.map((c,index)=>{
-              return (<MDBCard style={{marginTop:"15px",width:"700px",height:"40px"}}> <p style={{alignSelf:"flex-start",padding:"10px"}}>{c.comment}</p></MDBCard>
-               
-              )
+            {post.comments?.map((c, index) => {
+              return (
+                <MDBCard
+                  style={{ marginTop: "15px", width: "700px", height: "40px" }}
+                >
+                  <p style={{ alignSelf: "flex-start", padding: "10px" }}>
+                    {c.comment}
+                  </p>
+                </MDBCard>
+              );
             })}
+
             <MDBInputGroup
               className="mb-3"
               style={{ width: "600px", marginTop: "40px" }}
@@ -174,8 +185,18 @@ const App = () => {
                 className="form-control"
                 placeholder="Comment as username"
                 type="text"
+                onChange={(e)=>{
+                  setComment(e.target.value)
+                }}
               />
-              <MDBBtn outline color="warning">
+              <MDBBtn
+                outline
+                color="warning"
+                id={post._id}
+                onClick={(e) => {
+                  addComment(e.target.id);
+                }}
+              >
                 Comment
               </MDBBtn>
             </MDBInputGroup>

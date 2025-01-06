@@ -27,6 +27,7 @@ const Navbar = () => {
     setCentredModal,
     isClickedToAddPost,
     setisClickedToAddPost,
+    
     userName,
     setuserName,
   } = useContext(UserContext);
