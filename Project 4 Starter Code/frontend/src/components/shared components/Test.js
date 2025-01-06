@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   MDBBtn,
   MDBCard,
@@ -20,13 +21,15 @@ import {
   MDBDropdownToggle,
   MDBDropdownMenu,
   MDBDropdownItem,
+  MDBModalHeader,
+  MDBModalTitle,
 } from "mdb-react-ui-kit";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../App";
 const App = () => {
   const [modal1, setModal1] = useState(false);
-
+const navigate = useNavigate()
   const {
     token,
     setToken,
@@ -37,6 +40,8 @@ const App = () => {
     posts,
     setPosts,
   } = useContext(UserContext);
+  const [optSmModal, setOptSmModal] = useState(false);
+
   const [post, setPost] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -51,6 +56,8 @@ const App = () => {
   const headers = {
     Authorization: `Bearer ${token}`,
   };
+  const toggleOpen = () => setOptSmModal(!optSmModal);
+
   const getPostById = () => {
     axios
       .get(`http://localhost:5000/posts/getPostById/${id}`, { headers })
@@ -130,18 +137,57 @@ const App = () => {
               </div>
               {userId === post.author && (
                 <>
-                  {" "}
                   <MDBDropdown className="Drop">
                     <MDBDropdownToggle color="warning">
                       Edit Post
                     </MDBDropdownToggle>
                     <MDBDropdownMenu>
-                      <MDBDropdownItem link color="warning">
-                        Update
+                      <MDBDropdownItem>Update</MDBDropdownItem>
+                      <MDBDropdownItem divider />
+                      <MDBDropdownItem id={post._id} onClick={toggleOpen}>
+                        Delete
                       </MDBDropdownItem>
-                      <MDBDropdownItem link>Delete</MDBDropdownItem>
                     </MDBDropdownMenu>
                   </MDBDropdown>
+
+                  <MDBModal
+                    open={optSmModal}
+                    tabIndex="-1"
+                    onClose={() => setOptSmModal(false)}
+                  >
+                    <MDBModalDialog size="sm">
+                      <MDBModalContent>
+                        <MDBModalHeader>
+                          <MDBModalTitle>Are you sure?</MDBModalTitle>
+                          <MDBBtn
+                            className="btn-close"
+                            color="none"
+                            onClick={toggleOpen}
+                          ></MDBBtn>
+                        </MDBModalHeader>
+                        <MDBModalBody>
+                          <MDBBtn
+                            color="danger"
+                            className="mx-1"
+                            id={post._id}
+                            onClick={(e) => {
+                              deletePostById(e.target.id)
+                              navigate("/Dashboard")
+                            }}
+                          >
+                            Delete
+                          </MDBBtn>
+                          <MDBBtn
+                            color="light"
+                            className="mx-1"
+                            onClick={() => setOptSmModal(false)}
+                          >
+                            Close
+                          </MDBBtn>
+                        </MDBModalBody>
+                      </MDBModalContent>
+                    </MDBModalDialog>
+                  </MDBModal>
                 </>
               )}
             </div>
@@ -185,8 +231,8 @@ const App = () => {
                 className="form-control"
                 placeholder="Comment as username"
                 type="text"
-                onChange={(e)=>{
-                  setComment(e.target.value)
+                onChange={(e) => {
+                  setComment(e.target.value);
                 }}
               />
               <MDBBtn
