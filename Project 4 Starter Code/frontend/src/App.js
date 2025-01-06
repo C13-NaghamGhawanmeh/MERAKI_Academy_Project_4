@@ -15,6 +15,7 @@ const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [isLogged, setIsLogged] = useState(localStorage.getItem("isLogged"));
   const [centredModal, setCentredModal] = useState(false);
+  const [centredModal2, setCentredModal2] = useState(false);
   const [userName, setuserName] = useState("");
   const [userId, setUserId] = useState("");
 
@@ -42,6 +43,8 @@ const App = () => {
         setUserId,
         isClickedToUpdate,
         setIsClickedToUpdate,
+        centredModal2,
+        setCentredModal2,
       }}
     >
       <div className="App">

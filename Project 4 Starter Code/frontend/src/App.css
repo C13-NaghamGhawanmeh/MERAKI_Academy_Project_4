@@ -150,6 +150,11 @@ gap: 100px;
   width: 1100px;
   height: max-content;
 }
+/* .ttest {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+} */
 .titleDesc {
   display: flex;
   flex-direction: column;
@@ -163,11 +168,11 @@ gap: 100px;
 .Drop {
   margin-left: 1050px;
 }
-.delete,.update {
+.delete,
+.update {
   text-align: center;
   height: 30px;
 }
-.delete{
+.delete {
   color: rgb(255, 96, 96);
-
 }

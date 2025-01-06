@@ -58,7 +58,7 @@ const App = () => {
         console.log("hello here", res);
         setPost(res.data.post[0]);
         //   setPosts(res.data.posts);
-        //   setUserId(res.data.userId);
+          // setUserId(res.data.userId);
         //   setuserName(res.data.userName)
 
         console.log("res.data.post", res.data.post[0]);
@@ -91,6 +91,8 @@ const App = () => {
         setPosts(post);
         getPostById();
         // getAllPosts();
+        // console.log(post);
+        
       })
       .catch((err) => {
         console.log(err);
@@ -128,33 +130,55 @@ const App = () => {
                 <h2 className="text-black font">{post.title}</h2>
                 <p>{post.description}</p>
               </div>
-              <MDBDropdown className="Drop">
-                <MDBDropdownToggle color='warning'>Edit Post</MDBDropdownToggle>
-                <MDBDropdownMenu >
-                  <MDBDropdownItem link color="warning">Update</MDBDropdownItem>
-                  <MDBDropdownItem link  >Delete</MDBDropdownItem>
-                </MDBDropdownMenu>
-              </MDBDropdown>
+                {userId===post.author &&<> <MDBDropdown className="Drop">
+                  <MDBDropdownToggle color="warning">Edit Post</MDBDropdownToggle>
+                  <MDBDropdownMenu>
+                    <MDBDropdownItem link color="warning">
+                      Update
+                    </MDBDropdownItem>
+                    <MDBDropdownItem link>Delete</MDBDropdownItem>
+                  </MDBDropdownMenu>
+                </MDBDropdown></>}
+             
             </div>
-            <MDBRow className="photo">
-              <MDBCol lg={4} md={12} className="mb-4 mb-lg-0">
-                <div className="bg-image hover-overlay ripple shadow-1-strong rounded">
-                  <img
-                    src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1736174224/slwvy8jltdxmyo98ld7s.jpg"
-                    className="w-100"
-                  />
-                  <a
-                    style={{ cursor: "pointer" }}
-                    onClick={() => setModal1(!modal1)}
-                  >
-                    <div
-                      className="mask"
-                      style={{ backgroundColor: "rgba(251, 251, 251, 0.2)" }}
-                    ></div>
-                  </a>
-                </div>
-              </MDBCol>
-            </MDBRow>
+
+            {post.media?.map((p, index) => {
+              return (
+                <MDBCol lg={4} md={12} className="mb-4 mb-lg-0">
+                  <div className="bg-image hover-overlay ripple shadow-1-strong rounded ">
+                    <img src={p} className="w-100" />
+
+                    <a
+                      style={{ cursor: "pointer" }}
+                      onClick={() => setModal1(!modal1)}
+                    >
+                      <div
+                        className="mask"
+                        style={{ backgroundColor: "rgba(251, 251, 251, 0.2)" }}
+                      ></div>
+                    </a>
+                  </div>
+                </MDBCol>
+              );
+            })}
+            {post.comments?.map((c,index)=>{
+              return (<MDBCard style={{marginTop:"15px",width:"700px",height:"40px"}}> <p style={{alignSelf:"flex-start",padding:"10px"}}>{c.comment}</p></MDBCard>
+               
+              )
+            })}
+            <MDBInputGroup
+              className="mb-3"
+              style={{ width: "600px", marginTop: "40px" }}
+            >
+              <input
+                className="form-control"
+                placeholder="Comment as username"
+                type="text"
+              />
+              <MDBBtn outline color="warning">
+                Comment
+              </MDBBtn>
+            </MDBInputGroup>
             {/*  */}
 
             <MDBModal open={modal1} setShow={setModal1}>
@@ -186,19 +210,6 @@ const App = () => {
               </MDBModalDialog>
             </MDBModal>
             {/*  */}
-            <MDBInputGroup
-              className="mb-3"
-              style={{ width: "600px", marginTop: "40px" }}
-            >
-              <input
-                className="form-control"
-                placeholder="Comment as username"
-                type="text"
-              />
-              <MDBBtn outline color="warning">
-                Comment
-              </MDBBtn>
-            </MDBInputGroup>
           </div>
         </MDBCardBody>
       </MDBCard>
