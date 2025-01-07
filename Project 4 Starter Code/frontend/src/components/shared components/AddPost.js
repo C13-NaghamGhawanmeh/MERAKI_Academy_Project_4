@@ -44,6 +44,10 @@ export default function App() {
           setMedia(res.info.url);
           console.log("result", res.info.url);
         }
+        else{
+          setMedia("https://res.cloudinary.com/dozr5pfwt/image/upload/v1736268395/x1xkmf2yqdkn8lfhzxa2.png");
+
+        }
       }
     );
   }, []);

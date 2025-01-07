@@ -80,8 +80,8 @@ body {
 .HomeCards {
   height: 400px;
   width: 300px;
-  margin-top: 70px;
-  margin-left: 20px;
+  margin-top: 45px;
+  /* margin-left: 20px; */
   border: 5px solid rgb(244, 244, 239);
   border-radius: 15px;
 }
@@ -93,7 +93,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 70px;
+  /* gap: 70px; */
 }
 .DashPost {
   display: grid;
@@ -101,7 +101,7 @@ body {
   /* width: 3000px; */
   /* margin-left: 40px; */
   /* gap: 40px; */
-  margin-right: 60px;
+  margin-right: 80px;
 }
 
 .ModalInputs {
@@ -125,8 +125,9 @@ body {
 .TextCard {
   margin-top: 50px;
   margin-left: 50px;
-  width: 1300px;
-
+  width: 95%;
+  height: max-content;
+margin-bottom: 200px;
   /* background-color: #f6be79; */
 }
 .CardBody {
@@ -172,7 +173,7 @@ gap: 100px;
   justify-content: space-between;
 }
 .Drop {
-  margin-left: 1050px;
+  margin-left: 1180px;
 }
 .drop{
   margin-left: 10px;
@@ -188,4 +189,7 @@ gap: 100px;
 .delete:hover{
  color: red;
 }
-
+.imgg{
+  width: 500px;
+  height: 450px;
+}

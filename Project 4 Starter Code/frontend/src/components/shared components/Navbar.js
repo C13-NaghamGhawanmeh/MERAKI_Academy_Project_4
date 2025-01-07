@@ -73,7 +73,7 @@ const Navbar = () => {
                         <a
                           href="#"
                           style={{
-                            fontSize: "25px",
+                            fontSize: "22px",
                             fontFamily: "Arial, Helvetica, sans-serif",
                           }}
                         >
@@ -89,7 +89,7 @@ const Navbar = () => {
                           setisClickedToAddPost(true);
                         }}
                         style={{
-                          fontSize: "25px",
+                          fontSize: "22px",
                           fontFamily: "Arial, Helvetica, sans-serif",
                         }}
                       >
@@ -109,7 +109,7 @@ const Navbar = () => {
                               marginRight: "15px",
                             }}
                           >
-                            <MDBIcon far size='lg' icon="user-circle" />
+                            <MDBIcon far size='1x' icon="user-circle" />
                           </MDBDropdownToggle>
                           <MDBDropdownMenu>
                             <MDBDropdownItem
@@ -153,7 +153,7 @@ const Navbar = () => {
                         <a
                           href="#"
                           style={{
-                            fontSize: "18px",
+                            fontSize: "22px",
                             fontFamily: "Arial, Helvetica, sans-serif",
                           }}
                         >
@@ -166,7 +166,7 @@ const Navbar = () => {
                         <a
                           href="#"
                           style={{
-                            fontSize: "18px",
+                            fontSize: "22px",
                             fontFamily: "Arial, Helvetica, sans-serif",
                           }}
                         >

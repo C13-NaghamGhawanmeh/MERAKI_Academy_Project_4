@@ -146,7 +146,7 @@ const Dashboard = () => {
                 </MDBRipple>
                 <MDBCardBody>
                   <MDBCardTitle>{a.title}</MDBCardTitle>
-                  <MDBCardText>{a.description}</MDBCardText>
+                  {/* <MDBCardText>{a.description}</MDBCardText> */}
                   <MDBBtn
                     id={a._id}
                     href="#"

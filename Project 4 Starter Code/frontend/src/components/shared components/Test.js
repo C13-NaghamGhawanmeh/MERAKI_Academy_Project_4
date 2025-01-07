@@ -173,7 +173,7 @@ const App = () => {
             <div className="head">
               <div className="titleDesc">
                 <h2 className="text-black font">{post.title}</h2>
-                <p>{post.description}</p>
+                <p className="text-break" style={{width:"900px",textAlign:"start"}}>{post.description}</p>
               </div>
               {userId === post.author && (
                 <>
@@ -361,7 +361,7 @@ const App = () => {
             {post.media?.map((p, index) => {
               return (
                 <MDBCol lg={4} md={12} className="mb-4 mb-lg-0">
-                  <div className="bg-image hover-overlay ripple shadow-1-strong rounded ">
+                  <div className="bg-image hover-overlay ripple shadow-1-strong rounded imgg">
                     <img src={p} className="w-100" />
 
                     <a
@@ -380,9 +380,9 @@ const App = () => {
             {post.comments?.map((c, index) => {
               return (
                 <MDBCard
-                  style={{ marginTop: "15px", width: "700px", height: "40px" }}
+                  style={{ marginTop: "15px", width: "700px", height:"max-content" }}
                 >
-                  <p style={{ alignSelf: "flex-start", padding: "10px" }}>
+                  <p className="text-break" style={{ alignSelf: "flex-start", padding: "10px" }}>
                     {c.comment}
                   </p>
                 </MDBCard>
@@ -425,7 +425,7 @@ const App = () => {
                     >
                       <img
                         className="lg-image"
-                        src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1736174224/slwvy8jltdxmyo98ld7s.jpg"
+                        src={post.media}
                         title="YouTube video"
                         allowFullScreen
                         style={{ width: "470px", height: "350px" }}
