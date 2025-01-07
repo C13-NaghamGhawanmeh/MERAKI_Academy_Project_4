@@ -37,6 +37,7 @@ const Dashboard = () => {
         console.log(res);
         setPosts(res.data.posts);
         setUserId(res.data.userId);
+        localStorage.setItem("userId",res.data.userId)
         setuserName(res.data.userName)
 
         console.log("res.data.posts", res.data.posts);

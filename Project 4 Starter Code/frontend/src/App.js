@@ -17,7 +17,7 @@ const App = () => {
   const [centredModal, setCentredModal] = useState(false);
   const [centredModal2, setCentredModal2] = useState(false);
   const [userName, setuserName] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(localStorage.getItem("userId"));
 
   const [isClickedToAddPost, setisClickedToAddPost] = useState(false);
 

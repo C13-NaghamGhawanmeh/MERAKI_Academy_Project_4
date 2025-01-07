@@ -104,6 +104,8 @@ const updatePostById = (req, res) => {
         new: true,
       }
     )
+    .populate("comments")
+
     .then((result) => {
       res.status(200).json({
         success: true,

@@ -27,6 +27,7 @@ export default function App() {
     posts,
     setPosts,
   } = useContext(UserContext);
+  
   const cloudinaryRef = useRef();
   const widgetRef = useRef();
 
@@ -61,9 +62,9 @@ export default function App() {
   const changeDescription = (e) => {
     setDescription(e.target.value);
   };
-  const changeUrl = (e) => {
-    setMedia(e.target.value);
-  };
+  // const changeUrl = (e) => {
+  //   setMedia(e.target.value);
+  // };
 
   const addPost = () => {
     const headers = {

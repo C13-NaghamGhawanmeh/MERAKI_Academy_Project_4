@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   MDBBtn,
@@ -32,6 +32,25 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../App";
 const App = () => {
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef();
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: "dozr5pfwt",
+        uploadPreset: "xyz123",
+      },
+      function (err, res) {
+        if (res.info.url) {
+          setMedia(res.info.url);
+          console.log("result", res.info.url);
+        }
+      }
+    );
+  }, []);
+
   const [modal1, setModal1] = useState(false);
   const navigate = useNavigate();
   const {
@@ -108,17 +127,13 @@ const App = () => {
       .put(`http://localhost:5000/posts/${id}/update`, postInfo)
       .then((res) => {
         console.log(res);
-        
-        const updatedPost = res.data.post; 
-        const updatedPosts = posts.map((p) =>
-          p._id === id ? updatedPost : p 
-        );
-  
+
+        const updatedPost = res.data.post;
+        const updatedPosts = posts.map((p) => (p._id === id ? updatedPost : p));
+console.log("updatedPost",updatedPost);
+
         setPosts(updatedPosts);
-        setPost(updatedPost); 
-
-  
-
+        setPost(updatedPost);
       })
       .catch((err) => {
         console.log(err);
@@ -263,12 +278,15 @@ const App = () => {
                             rows="{4}"
                             onChange={changeDescription}
                           />
-                          <MDBInput
+                          {/* <MDBInput
                             label="Images"
                             id="typeURL"
                             type="url"
                             onChange={changeUrl}
-                          />
+                          /> */}
+                          <MDBBtn onClick={() => widgetRef.current.open()}>
+                            Upload Image
+                          </MDBBtn>
                         </MDBModalBody>
                         {IsCreated && (
                           <>
