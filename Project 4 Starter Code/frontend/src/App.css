@@ -173,7 +173,9 @@ gap: 100px;
   justify-content: space-between;
 }
 .Drop {
-  margin-left: 1180px;
+  position: absolute;
+  margin-left: 1280px;
+
 }
 .drop{
   margin-left: 10px;
@@ -191,5 +193,5 @@ gap: 100px;
 }
 .imgg{
   width: 500px;
-  height: 450px;
+  /* height: 450px; */
 }

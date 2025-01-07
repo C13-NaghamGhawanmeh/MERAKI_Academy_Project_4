@@ -75,6 +75,8 @@ const App = () => {
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
   const [isCommented, setIsCommented] = useState(false);
+  const [author, setAuthor] = useState("");
+  const [commenter, setCommenter] = useState("");
   const postInfo = { title, description, media };
   const commentInfo = { comment };
   const { id } = useParams();
@@ -96,13 +98,20 @@ const App = () => {
     axios
       .get(`http://localhost:5000/posts/getPostById/${id}`, { headers })
       .then((res) => {
-        console.log("hello here", res);
+        // console.log("hello here", res.data.post[0]);
         setPost(res.data.post[0]);
+        setAuthor(res.data.post[0].author.userName);
+        // setCommenter(res.data.post[0].comments.commenter.userName)
         //   setPosts(res.data.posts);
         // setUserId(res.data.userId);
         //   setuserName(res.data.userName)
-
-        console.log("res.data.post", res.data.post[0]);
+        const test = res.data.post[0].comments.map((e) => {
+          return e.commenter.userName;
+        });
+        console.log("dddddddd", test);
+        setCommenter(test);
+        // console.log("res.data.post", res.data.post[0].comments.map((e)=>{console.log(e);
+        // }));
       })
       .catch((err) => {
         console.log(err);
@@ -152,10 +161,15 @@ const App = () => {
         //   return p;
         // });
         // setComment(comment);
+        const newComment = res.data.comment; 
         setPost((prevPost) => ({
           ...prevPost,
-          comments: [...prevPost.comments, res.data.comment],
+          comments: [...prevPost.comments, newComment], 
         }));
+        // setPost((prevPost) => ({
+        //   ...prevPost,
+        //   comments: [...prevPost.comments, res.data.comment],
+        // }));
         setComment("");
       })
       .catch((err) => {
@@ -172,8 +186,15 @@ const App = () => {
           <div>
             <div className="head">
               <div className="titleDesc">
+                <h1 className="text-black font">{author}</h1>
+
                 <h2 className="text-black font">{post.title}</h2>
-                <p className="text-break" style={{width:"900px",textAlign:"start"}}>{post.description}</p>
+                <p
+                  className="text-break"
+                  style={{ width: "900px", textAlign: "start" }}
+                >
+                  {post.description}
+                </p>
               </div>
               {userId === post.author && (
                 <>
@@ -380,10 +401,17 @@ const App = () => {
             {post.comments?.map((c, index) => {
               return (
                 <MDBCard
-                  style={{ marginTop: "15px", width: "700px", height:"max-content" }}
+                  style={{
+                    marginTop: "15px",
+                    width: "700px",
+                    height: "max-content",
+                  }}
                 >
-                  <p className="text-break" style={{ alignSelf: "flex-start", padding: "10px" }}>
-                    {c.comment}
+                  <p
+                    className="text-break"
+                    style={{ alignSelf: "flex-start", padding: "10px" }}
+                  >
+                    {c.commenter?.userName}: {c.comment}
                   </p>
                 </MDBCard>
               );

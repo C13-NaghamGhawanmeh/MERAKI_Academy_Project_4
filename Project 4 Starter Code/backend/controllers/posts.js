@@ -59,7 +59,12 @@ const getPostById = (req, res) => {
   const postId = req.params.id;
   postModel
     .find({ _id: postId })
-    .populate("comments")
+    // .populate("comments")
+    .populate("author")
+    .populate({ 
+      path: 'comments',
+      populate: { path: 'commenter' }
+    })
     .then((result) => {
       res.status(200).json({
         success: true,
