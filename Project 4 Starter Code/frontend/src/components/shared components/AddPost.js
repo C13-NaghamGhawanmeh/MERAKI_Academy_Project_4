@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import {
   MDBBtn,
   MDBModal,
@@ -25,8 +25,27 @@ export default function App() {
     centredModal,
     setCentredModal,
     posts,
-    setPosts
+    setPosts,
   } = useContext(UserContext);
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef();
+
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: "dozr5pfwt",
+        uploadPreset: "xyz123",
+      },
+      function (err, res) {
+        if (res.info.url) {
+          setMedia(res.info.url);
+          console.log("result", res.info.url);
+        }
+      }
+    );
+  }, []);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -58,7 +77,7 @@ export default function App() {
         //   return p;
         // });
         // console.log("hhhhhhh",post);
-        
+
         setPosts((prevPosts) => [...prevPosts, res.data.post]);
         setResponse(res.data.message);
         setIsCreated(true);
@@ -114,12 +133,15 @@ export default function App() {
                   rows="{4}"
                   onChange={changeDescription}
                 />
-                <MDBInput
+                {/* <MDBInput
                   label="Images"
                   id="typeURL"
                   type="url"
                   onChange={changeUrl}
-                />
+                /> */}
+                <MDBBtn onClick={() => widgetRef.current.open()}>
+                  Upload Image
+                </MDBBtn>
               </MDBModalBody>
               {/* {IsCreated && (
                 <>
