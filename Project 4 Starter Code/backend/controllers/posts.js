@@ -108,7 +108,7 @@ const updatePostById = (req, res) => {
       res.status(200).json({
         success: true,
         message: "Post updated",
-        article: result,
+        post: result,
       });
     })
     .catch((err) => {

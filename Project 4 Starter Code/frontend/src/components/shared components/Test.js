@@ -27,7 +27,6 @@ import {
   MDBProgress,
   MDBProgressBar,
   MDBInput,
-
 } from "mdb-react-ui-kit";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -53,7 +52,7 @@ const App = () => {
   const [media, setMedia] = useState("");
   const [comment, setComment] = useState("");
   const [IsCreated, setIsCreated] = useState(false);
-    const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
   const [isCommented, setIsCommented] = useState(false);
@@ -108,13 +107,18 @@ const App = () => {
     axios
       .put(`http://localhost:5000/posts/${id}/update`, postInfo)
       .then((res) => {
-        const post = posts.map((p, index) => {
-          return p;
-        });
-        setPosts(post);
-        getPostById();
-        // getAllPosts();
-        // console.log(post);
+        console.log(res);
+        
+        const updatedPost = res.data.post; 
+        const updatedPosts = posts.map((p) =>
+          p._id === id ? updatedPost : p 
+        );
+  
+        setPosts(updatedPosts);
+        setPost(updatedPost); 
+
+  
+
       })
       .catch((err) => {
         console.log(err);
@@ -129,10 +133,15 @@ const App = () => {
       })
       .then((res) => {
         // setIsCommented(false);
-        const comment = post.comments.map((p, index) => {
-          return p;
-        });
-        setComment(comment);
+        // const comment = post.comments.map((p, index) => {
+        //   return p;
+        // });
+        // setComment(comment);
+        setPost((prevPost) => ({
+          ...prevPost,
+          comments: [...prevPost.comments, res.data.comment],
+        }));
+        setComment("");
       })
       .catch((err) => {
         console.log(err);
@@ -140,7 +149,7 @@ const App = () => {
   };
   useEffect(() => {
     getPostById();
-  }, [comment]);
+  }, []);
   return (
     <>
       <MDBCard className="TextCard">
@@ -159,14 +168,20 @@ const App = () => {
                     </MDBDropdownToggle>
                     <MDBDropdownMenu>
                       <MDBDropdownItem
-                      className="drop"
+                        className="drop"
                         id={post._id}
-                        onClick={()=>{setIsClickedToUpdate(true)}}
+                        onClick={() => {
+                          setIsClickedToUpdate(true);
+                        }}
                       >
                         Update
                       </MDBDropdownItem>
                       <MDBDropdownItem divider />
-                      <MDBDropdownItem className="drop delete" id={post._id} onClick={toggleOpen}>
+                      <MDBDropdownItem
+                        className="drop delete"
+                        id={post._id}
+                        onClick={toggleOpen}
+                      >
                         Delete
                       </MDBDropdownItem>
                     </MDBDropdownMenu>
@@ -304,15 +319,15 @@ const App = () => {
                             Close
                           </MDBBtn>
                           <MDBBtn
-                          id={post._id}
+                            id={post._id}
                             style={{
                               fontSize: "18px",
                               fontFamily: "Arial, Helvetica, sans-serif",
                             }}
                             color="warning"
-                            onClick={(e)=>{
-                              updatePostById(e.target.id)
-                              setIsClickedToUpdate(!isClickedToUpdate)
+                            onClick={(e) => {
+                              updatePostById(e.target.id);
+                              setIsClickedToUpdate(!isClickedToUpdate);
                             }}
                           >
                             Update Post
@@ -364,6 +379,7 @@ const App = () => {
                 className="form-control"
                 placeholder="Comment as username"
                 type="text"
+                value={comment}
                 onChange={(e) => {
                   setComment(e.target.value);
                 }}
