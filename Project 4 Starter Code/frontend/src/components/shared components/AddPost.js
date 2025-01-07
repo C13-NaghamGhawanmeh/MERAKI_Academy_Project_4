@@ -54,15 +54,16 @@ export default function App() {
     axios
       .post("http://localhost:5000/posts/createPost", postInfo, { headers })
       .then((res) => {
-        const post = posts.filter((p, index) => {
-          return p;
-        });
-        console.log("hhhhhhh",post);
+        // const post = posts.map((p, index) => {
+        //   return p;
+        // });
+        // console.log("hhhhhhh",post);
         
-        setPosts(post)
+        setPosts((prevPosts) => [...prevPosts, res.data.post]);
         setResponse(res.data.message);
         setIsCreated(true);
         setIsError(false);
+        setCentredModal(!centredModal);
         console.log(res);
       })
       .catch((err) => {
@@ -120,7 +121,7 @@ export default function App() {
                   onChange={changeUrl}
                 />
               </MDBModalBody>
-              {IsCreated && (
+              {/* {IsCreated && (
                 <>
                   <MDBProgress>
                     <MDBProgressBar
@@ -154,7 +155,7 @@ export default function App() {
                 >
                   {error}
                 </p>
-              )}
+              )} */}
               <MDBModalFooter>
                 <MDBBtn
                   color="secondary"

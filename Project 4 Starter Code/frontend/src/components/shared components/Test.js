@@ -159,13 +159,14 @@ const App = () => {
                     </MDBDropdownToggle>
                     <MDBDropdownMenu>
                       <MDBDropdownItem
+                      className="drop"
                         id={post._id}
                         onClick={()=>{setIsClickedToUpdate(true)}}
                       >
                         Update
                       </MDBDropdownItem>
                       <MDBDropdownItem divider />
-                      <MDBDropdownItem id={post._id} onClick={toggleOpen}>
+                      <MDBDropdownItem className="drop delete" id={post._id} onClick={toggleOpen}>
                         Delete
                       </MDBDropdownItem>
                     </MDBDropdownMenu>

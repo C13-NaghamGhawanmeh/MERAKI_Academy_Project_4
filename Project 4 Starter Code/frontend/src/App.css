@@ -168,11 +168,17 @@ gap: 100px;
 .Drop {
   margin-left: 1050px;
 }
-.delete,
+.drop{
+  margin-left: 10px;
+  margin-top: 8px;
+  height: 30px;
+  font-size: 17px;
+}
+/* .delete,
 .update {
   text-align: center;
   height: 30px;
-}
-.delete {
-  color: rgb(255, 96, 96);
+} */
+.delete:hover{
+ color: red;
 }
