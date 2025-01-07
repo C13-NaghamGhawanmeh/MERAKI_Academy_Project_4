@@ -6,7 +6,9 @@
   /* background-color: rgb(221, 202, 238); */
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  /* gap: 70px !important; */
+  margin-top: 25px;
+  margin-left: 70px;
 }
 body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
@@ -91,13 +93,15 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 35px;
+  gap: 70px;
 }
 .DashPost {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin-left: 32px;
-  /* margin-right: 2px; */
+  /* width: 3000px; */
+  /* margin-left: 40px; */
+  /* gap: 40px; */
+  margin-right: 60px;
 }
 
 .ModalInputs {
@@ -150,16 +154,18 @@ gap: 100px;
   width: 1100px;
   height: max-content;
 }
-/* .ttest {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-} */
+.test {
+ 
+  gap: 10px;
+}
 .titleDesc {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
+/* .desc{
+  width:px;
+} */
 .head {
   display: flex;
   flex-direction: row;
@@ -182,3 +188,4 @@ gap: 100px;
 .delete:hover{
  color: red;
 }
+

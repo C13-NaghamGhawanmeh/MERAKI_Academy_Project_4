@@ -16,7 +16,16 @@ import {
 const Dashboard = () => {
   const navigate = useNavigate();
 
-  const { token, setToken, posts, setPosts ,userName, setuserName,userId, setUserId} = useContext(UserContext);
+  const {
+    token,
+    setToken,
+    posts,
+    setPosts,
+    userName,
+    setuserName,
+    userId,
+    setUserId,
+  } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [media, setMedia] = useState("");
@@ -37,8 +46,8 @@ const Dashboard = () => {
         console.log(res);
         setPosts(res.data.posts);
         setUserId(res.data.userId);
-        localStorage.setItem("userId",res.data.userId)
-        setuserName(res.data.userName)
+        localStorage.setItem("userId", res.data.userId);
+        setuserName(res.data.userName);
 
         console.log("res.data.posts", res.data.posts);
       })
@@ -47,75 +56,86 @@ const Dashboard = () => {
       });
   };
 
-  const deletePostById = (id) => {
-    axios
-      .delete(`http://localhost:5000/posts/${id}/delete`)
-      .then((res) => {
-        const post = posts.filter((post, index) => {
-          return post._id !== id;
-        });
-        setPosts(post);
-        console.log(posts);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const deletePostById = (id) => {
+  //   axios
+  //     .delete(`http://localhost:5000/posts/${id}/delete`)
+  //     .then((res) => {
+  //       const post = posts.filter((post, index) => {
+  //         return post._id !== id;
+  //       });
+  //       setPosts(post);
+  //       console.log(posts);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
-  const updatePostById = (id) => {
-    axios
-      .put(`http://localhost:5000/posts/${id}/update`, postInfo)
-      .then((res) => {
-        const post = posts.map((p, index) => {
-          return p;
-        });
-        setPosts(post);
-        getAllPosts();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const addComment = (id) => {
-    setIsCommented(true);
+  // const updatePostById = (id) => {
+  //   axios
+  //     .put(`http://localhost:5000/posts/${id}/update`, postInfo)
+  //     .then((res) => {
+  //       const post = posts.map((p, index) => {
+  //         return p;
+  //       });
+  //       setPosts(post);
+  //       getAllPosts();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+  // const addComment = (id) => {
+  //   setIsCommented(true);
 
-    axios
-      .post(`http://localhost:5000/posts/${id}/comments/`, commentInfo, {
-        headers,
-      })
-      .then((res) => {
-        setIsCommented(false);
-        getAllPosts();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  //   axios
+  //     .post(`http://localhost:5000/posts/${id}/comments/`, commentInfo, {
+  //       headers,
+  //     })
+  //     .then((res) => {
+  //       setIsCommented(false);
+  //       getAllPosts();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   useEffect(() => {
     getAllPosts();
   }, []);
 
   return (
-    <div className="DashPost">
+    <div className=" DashPost ">
       {posts?.map((a, index) => {
         return (
-          <div className="posts" key={index}>
-            <div className="desc">
+          <div className="posts " key={index}>
+            <div className="desc" >
               <MDBCard className="HomeCards">
                 <MDBRipple
                   rippleColor="light"
                   rippleTag="div"
                   className="bg-image hover-overlay"
                 >
-                  {a.media.map((p, index) => {
-                    return (
-                      <MDBCardImage
-                        src={p}
-                        style={{ width: "400px", height: "250px"}}
-                        fluid
-                        alt="..."
-                      />
-                    );
+                  {a.media?.map((p, index) => {
+                    if (p) {
+                      return (
+                        <MDBCardImage
+                          src={p}
+                          style={{ width: "400px", height: "250px" }}
+                          fluid
+                          alt="..."
+                        />
+                      );
+                    } else {
+                      return (
+                        <MDBCardImage
+                          src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1736268395/x1xkmf2yqdkn8lfhzxa2.png"
+                          style={{ width: "400px", height: "250px" }}
+                          fluid
+                          alt="..."
+                        />
+                      );
+                    }
                   })}
                   <a>
                     <div
@@ -128,7 +148,7 @@ const Dashboard = () => {
                   <MDBCardTitle>{a.title}</MDBCardTitle>
                   <MDBCardText>{a.description}</MDBCardText>
                   <MDBBtn
-                  id={a._id}
+                    id={a._id}
                     href="#"
                     color="warning"
                     onClick={(e) => {

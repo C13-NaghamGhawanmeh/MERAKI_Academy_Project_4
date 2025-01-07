@@ -130,7 +130,7 @@ const App = () => {
 
         const updatedPost = res.data.post;
         const updatedPosts = posts.map((p) => (p._id === id ? updatedPost : p));
-console.log("updatedPost",updatedPost);
+        console.log("updatedPost", updatedPost);
 
         setPosts(updatedPosts);
         setPost(updatedPost);

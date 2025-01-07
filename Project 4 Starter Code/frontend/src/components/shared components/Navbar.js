@@ -27,7 +27,7 @@ const Navbar = () => {
     setCentredModal,
     isClickedToAddPost,
     setisClickedToAddPost,
-    
+
     userName,
     setuserName,
   } = useContext(UserContext);
@@ -50,67 +50,66 @@ const Navbar = () => {
               SAKAN
             </MDBNavbarBrand>
           </div>
-          {token && <MDBInputGroup tag="form" className="d-flex w-auto mb-3 Search">
-            <input
-              className="form-control Input"
-              placeholder="Search"
-              aria-label="Search"
-              type="Search"
-            />
-            <MDBBtn outline color="warning">
-              Search
-            </MDBBtn>
-          </MDBInputGroup>}
+          {token && (
+            <MDBInputGroup tag="form" className="d-flex w-auto mb-3 Search">
+              <input
+                className="form-control Input"
+                placeholder="Search"
+                aria-label="Search"
+                type="Search"
+              />
+              <MDBBtn outline color="warning">
+                Search
+              </MDBBtn>
+            </MDBInputGroup>
+          )}
           <div>
             {token ? (
               <div>
                 <nav aria-label="breadcrumb">
                   <MDBBreadcrumb className="BreadcrumbItem">
-                    <Link to={"/Dashboard"}>
-                      <MDBBreadcrumbItem>
+                    <MDBBreadcrumbItem>
+                      <Link to={"/Dashboard"}>
                         <a
                           href="#"
                           style={{
-                            fontSize: "18px",
+                            fontSize: "25px",
                             fontFamily: "Arial, Helvetica, sans-serif",
                           }}
                         >
                           Home
                         </a>
-                      </MDBBreadcrumbItem>
-                    </Link>
-                    {/* <Link to={"/Test"}> */}
+                      </Link>
+                    </MDBBreadcrumbItem>
                     <MDBBreadcrumbItem>
                       <a
                         href="#"
                         onClick={() => {
-                          // TODO
-
                           setCentredModal(!centredModal);
                           setisClickedToAddPost(true);
                         }}
                         style={{
-                          fontSize: "18px",
+                          fontSize: "25px",
                           fontFamily: "Arial, Helvetica, sans-serif",
                         }}
                       >
-                        Add New Post
+                        Add Post
                       </a>
                     </MDBBreadcrumbItem>
                     {isClickedToAddPost && <AddPost />}
                     {/* </Link> */}
 
                     <MDBBreadcrumbItem>
-                      <MDBNavbarItem>
                         <MDBDropdown>
                           <MDBDropdownToggle
                             tag="a"
                             className="nav-link"
-                            role="button" style={{
-                              marginRight:"15px"
+                            role="button"
+                            style={{
+                              marginRight: "15px",
                             }}
                           >
-                            <MDBIcon far icon="user-circle" />
+                            <MDBIcon far size='lg' icon="user-circle" />
                           </MDBDropdownToggle>
                           <MDBDropdownMenu>
                             <MDBDropdownItem
@@ -141,7 +140,6 @@ const Navbar = () => {
                             </MDBDropdownItem>
                           </MDBDropdownMenu>
                         </MDBDropdown>
-                      </MDBNavbarItem>
                     </MDBBreadcrumbItem>
                   </MDBBreadcrumb>
                 </nav>
