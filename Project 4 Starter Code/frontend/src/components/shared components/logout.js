@@ -9,7 +9,7 @@ const Logout = () => {
   setToken(null);
   setIsLogged(false);
   localStorage.clear();
-  navigate("/Login") 
+  navigate("/") 
 };
 
 export default Logout;

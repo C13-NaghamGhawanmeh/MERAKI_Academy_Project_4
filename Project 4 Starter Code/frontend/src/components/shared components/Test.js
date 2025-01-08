@@ -43,9 +43,16 @@ const App = () => {
         uploadPreset: "xyz123",
       },
       function (err, res) {
-        if (res.info.url) {
-          setMedia(res.info.url);
-          console.log("result", res.info.url);
+        try {
+          if (res.info.url) {
+            setMedia(res.info.url);
+            console.log("success", res.info.url);
+          }
+         
+        } catch (error) {
+          console.log("failed",error);
+      setMedia("https://res.cloudinary.com/dozr5pfwt/image/upload/v1736337799/f5b7lm2jl07flfg4rzll.png");
+          
         }
       }
     );
@@ -106,13 +113,13 @@ const App = () => {
         //   setPosts(res.data.posts);
         // setUserId(res.data.userId);
         //   setuserName(res.data.userName)
-        const test = res.data.post[0].comments.map((e) => {
-          return e.commenter.userName;
-        });
+        // const test = res.data.post[0].comments.map((e) => {
+        //   return e.commenter.userName;
+        // });
         console.log("dddddddd", res.data.post[0].author._id);
-        console.log("ooooooooooooo",test);
+        // console.log("ooooooooooooo",test);
         setAuthorId(res.data.post[0].author._id)
-        setCommenter(test);
+        // setCommenter(test);
         // console.log("res.data.post", res.data.post[0].comments.map((e)=>{console.log(e);
         // }));
       
@@ -458,7 +465,7 @@ const App = () => {
                       <img
                         className="lg-image"
                         src={post.media}
-                        title="YouTube video"
+                        // title="YouTube video"
                         allowFullScreen
                         style={{ width: "470px", height: "350px" }}
                       ></img>

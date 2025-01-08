@@ -148,7 +148,7 @@ const Navbar = () => {
               <div>
                 <nav aria-label="breadcrumb">
                   <MDBBreadcrumb className="BreadcrumbItem">
-                    <Link to={"/Login"}>
+                    <Link to={"/"}>
                       <MDBBreadcrumbItem>
                         <a
                           href="#"

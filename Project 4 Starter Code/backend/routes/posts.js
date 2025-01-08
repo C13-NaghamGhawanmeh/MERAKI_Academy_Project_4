@@ -11,6 +11,7 @@ const {
 } = require("../controllers/posts");
 
 const { createNewComment } = require("./../controllers/comments");
+const { addToFavorite } = require("../controllers/favorites");
 
 const postsRouter = express.Router();
 
@@ -30,5 +31,9 @@ postsRouter.post(
   authorization("CREATE_COMMENTS"),
   createNewComment
 );
-
+postsRouter.post(
+  "/:postId/favorites",
+  authentication,
+  addToFavorite
+);
 module.exports = postsRouter;

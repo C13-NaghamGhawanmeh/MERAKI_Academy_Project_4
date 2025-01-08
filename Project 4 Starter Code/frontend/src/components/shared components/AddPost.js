@@ -48,7 +48,7 @@ export default function App() {
        
       } catch (error) {
         console.log("failed",error);
-    setMedia("https://res.cloudinary.com/dozr5pfwt/image/upload/v1736268395/x1xkmf2yqdkn8lfhzxa2.png");
+    setMedia("https://res.cloudinary.com/dozr5pfwt/image/upload/v1736337799/f5b7lm2jl07flfg4rzll.png");
         
       }
       }
