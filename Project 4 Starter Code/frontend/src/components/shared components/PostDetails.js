@@ -81,7 +81,7 @@ const App = () => {
   const [author, setAuthor] = useState("");
   const [authorId, setAuthorId] = useState("");
   const [commenter, setCommenter] = useState("");
-  const [isClickedToAdd, setIsClickedToAdd] = useState(true)
+  const [isClickedToAdd, setIsClickedToAdd] = useState(true);
   const postInfo = { title, description, media };
   const commentInfo = { comment };
   const { id } = useParams();
@@ -151,7 +151,6 @@ const App = () => {
         headers,
       })
       .then((res) => {
-     
         const newComment = res.data.comment;
         setPost((prevPost) => ({
           ...prevPost,
@@ -163,44 +162,40 @@ const App = () => {
         console.log(err);
       });
   };
-  
+
   useEffect(() => {
     getPostById();
   }, []);
   // ===================================================AddToFavorite===========================
 
-  const addToFavorite = (postId)=>{
+  const addToFavorite = (postId) => {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
     console.log(headers);
-    
-  
+
     axios
-      .post(`http://localhost:5000/posts/${postId}/favorites`,{} ,{headers})
+      .post(`http://localhost:5000/posts/${postId}/favorites`, {}, { headers })
       .then((res) => {
-     console.log("added");
-     
+        console.log("added");
       })
       .catch((err) => {
         console.log(err);
       });
+  };
 
-
-  }
-
-
-  const deleteFavoriteItem = (id)=>{
+  const deleteFavoriteItem = (id) => {
     axios
-      .delete(`http://localhost:5000/posts/${id}/deleteFavoriteItem`,{headers})
+      .delete(`http://localhost:5000/posts/${id}/deleteFavoriteItem`, {
+        headers,
+      })
       .then((res) => {
         console.log(res);
-        
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+  };
   return (
     <>
       <MDBCard className="TextCard">
@@ -208,8 +203,27 @@ const App = () => {
           <div>
             <div className="head">
               <div className="titleDesc">
-                <h1 className="text-black font">{author}</h1>
-
+                <div className="firstLine">
+                  <h1 className="text-black font">{author}</h1>
+                  {userId === authorId || (
+                    <MDBBtn
+                      className="save"
+                      id={post._id}
+                      color="warning"
+                      onClick={(e) => {
+                        if (e.target.innerText === "SAVE POST") {
+                          addToFavorite(e.target.id);
+                        } else {
+                          deleteFavoriteItem(e.target.id);
+                        }
+                        console.log(e.target.innerText);
+                        setIsClickedToAdd(!isClickedToAdd);
+                      }}
+                    >
+                      {isClickedToAdd ? <>Save Post</> : <>Unsave</>}
+                    </MDBBtn>
+                  )}
+                </div>
                 <h2 className="text-black font">{post.title}</h2>
                 <p
                   className="text-break"
@@ -411,31 +425,10 @@ const App = () => {
                       ></div>
                     </a>
                   </div>
-                  <MDBIcon id={post._id} far icon="heart"  onClick={(e)=>{
-                    // setIsClickedToAdd(false)
-                    addToFavorite(e.target.id)
-
-                  }}/>
-                  <MDBIcon id={post._id} fas icon="heart"  onClick={(e)=>{
-                    // setIsClickedToAdd(false)
-                    deleteFavoriteItem(e.target.id)
-
-                  }}/>
-                  {/* {isClickedToAdd ? <MDBIcon id={post._id} fas icon="heart"  onClick={(e)=>{
-                    setIsClickedToAdd(false)
-                    addToFavorite(e.target.id)
-
-                  }}/> : <MDBIcon id={post._id} far icon="heart" onClick={(e)=>{
-                    setIsClickedToAdd(true)
-
-                  }}/> } */}
-                 
-                  
                 </MDBCol>
-                
               );
             })}
-            
+
             {post.comments?.map((c, index) => {
               return (
                 <MDBCard

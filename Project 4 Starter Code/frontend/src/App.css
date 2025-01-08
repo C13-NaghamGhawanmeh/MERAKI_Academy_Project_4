@@ -195,3 +195,13 @@ gap: 100px;
   width: 500px;
   /* height: 450px; */
 }
+.firstLine{
+  display: flex;
+  flex-direction: row;
+  width: 1400px;
+  justify-content: space-between;
+}
+.save{
+
+  height: 40px;
+}
