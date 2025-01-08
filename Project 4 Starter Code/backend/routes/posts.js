@@ -11,7 +11,7 @@ const {
 } = require("../controllers/posts");
 
 const { createNewComment } = require("./../controllers/comments");
-const { addToFavorite } = require("../controllers/favorites");
+const { addToFavorite ,getAllFavorites} = require("../controllers/favorites");
 
 const postsRouter = express.Router();
 
@@ -36,4 +36,6 @@ postsRouter.post(
   authentication,
   addToFavorite
 );
+postsRouter.get("/getAllFavorites", authentication, getAllFavorites);
+
 module.exports = postsRouter;
