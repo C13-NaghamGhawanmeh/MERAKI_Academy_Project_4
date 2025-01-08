@@ -190,7 +190,17 @@ const App = () => {
   }
 
 
-
+  const deleteFavoriteItem = (id)=>{
+    axios
+      .delete(`http://localhost:5000/posts/${id}/deleteFavoriteItem`,{headers})
+      .then((res) => {
+        console.log(res);
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   return (
     <>
       <MDBCard className="TextCard">
@@ -408,7 +418,7 @@ const App = () => {
                   }}/>
                   <MDBIcon id={post._id} fas icon="heart"  onClick={(e)=>{
                     // setIsClickedToAdd(false)
-                    // deleteFavoriteItem(e.target.id)
+                    deleteFavoriteItem(e.target.id)
 
                   }}/>
                   {/* {isClickedToAdd ? <MDBIcon id={post._id} fas icon="heart"  onClick={(e)=>{
