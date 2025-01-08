@@ -152,7 +152,7 @@ const Dashboard = () => {
                     href="#"
                     color="warning"
                     onClick={(e) => {
-                      navigate(`/Test/${e.target.id}`);
+                      navigate(`/PostDetails/${e.target.id}`);
                     }}
                   >
                     More Details

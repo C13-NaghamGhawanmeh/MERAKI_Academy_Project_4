@@ -8,7 +8,7 @@ import { createContext, useState } from "react";
 import Dashboard from "./components/shared components/Dashboard";
 import AddPost from "./components/shared components/AddPost";
 import Logout from "./components/shared components/logout";
-import Test from "./components/shared components/Test";
+import PostDetails from "./components/shared components/PostDetails";
 import "antd/dist/reset.css";
 export const UserContext = createContext();
 const App = () => {
@@ -56,8 +56,9 @@ const App = () => {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/AddPost" element={<AddPost />} />
           <Route path="/Logout" element={<Logout />} />
-          <Route path="/Test" element={<Test />} />
-          <Route path="/Test/:id" element={<Test />} />
+          <Route path="/PostDetails" element={<PostDetails />} />
+          <Route path="/PostDetails/:id" element={<PostDetails />} />
+          {/* <Route path="/Favorites/:id" element={<Favorites />} /> */}
         </Routes>
       </div>
     </UserContext.Provider>

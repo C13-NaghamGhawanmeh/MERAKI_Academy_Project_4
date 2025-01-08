@@ -4,12 +4,7 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBListGroup,
-  MDBListGroupItem,
-  MDBRipple,
-  MDBContainer,
   MDBCol,
-  MDBRow,
   MDBModal,
   MDBModalBody,
   MDBModalFooter,
@@ -27,6 +22,7 @@ import {
   MDBProgress,
   MDBProgressBar,
   MDBInput,
+  MDBRow,
 } from "mdb-react-ui-kit";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -48,11 +44,11 @@ const App = () => {
             setMedia(res.info.url);
             console.log("success", res.info.url);
           }
-         
         } catch (error) {
-          console.log("failed",error);
-      setMedia("https://res.cloudinary.com/dozr5pfwt/image/upload/v1736337799/f5b7lm2jl07flfg4rzll.png");
-          
+          console.log("failed", error);
+          setMedia(
+            "https://res.cloudinary.com/dozr5pfwt/image/upload/v1736337799/f5b7lm2jl07flfg4rzll.png"
+          );
         }
       }
     );
@@ -83,8 +79,9 @@ const App = () => {
   const [error, setError] = useState("");
   const [isCommented, setIsCommented] = useState(false);
   const [author, setAuthor] = useState("");
-  const [authorId, setAuthorId] = useState("")
+  const [authorId, setAuthorId] = useState("");
   const [commenter, setCommenter] = useState("");
+  const [isClickedToAdd, setIsClickedToAdd] = useState(true)
   const postInfo = { title, description, media };
   const commentInfo = { comment };
   const { id } = useParams();
@@ -106,23 +103,10 @@ const App = () => {
     axios
       .get(`http://localhost:5000/posts/getPostById/${id}`, { headers })
       .then((res) => {
-        // console.log("hello here", res.data.post[0]);
         setPost(res.data.post[0]);
         setAuthor(res.data.post[0].author.userName);
-        // setCommenter(res.data.post[0].comments.commenter.userName)
-        //   setPosts(res.data.posts);
-        // setUserId(res.data.userId);
-        //   setuserName(res.data.userName)
-        // const test = res.data.post[0].comments.map((e) => {
-        //   return e.commenter.userName;
-        // });
-        console.log("dddddddd", res.data.post[0].author._id);
-        // console.log("ooooooooooooo",test);
-        setAuthorId(res.data.post[0].author._id)
-        // setCommenter(test);
-        // console.log("res.data.post", res.data.post[0].comments.map((e)=>{console.log(e);
-        // }));
-      
+        // console.log("dddddddd", res.data.post[0].author._id);
+        setAuthorId(res.data.post[0].author._id);
       })
       .catch((err) => {
         console.log(err);
@@ -167,29 +151,46 @@ const App = () => {
         headers,
       })
       .then((res) => {
-        // setIsCommented(false);
-        // const comment = post.comments.map((p, index) => {
-        //   return p;
-        // });
-        // setComment(comment);
-        const newComment = res.data.comment; 
+     
+        const newComment = res.data.comment;
         setPost((prevPost) => ({
           ...prevPost,
-          comments: [...prevPost.comments, newComment], 
+          comments: [...prevPost.comments, newComment],
         }));
-        // setPost((prevPost) => ({
-        //   ...prevPost,
-        //   comments: [...prevPost.comments, res.data.comment],
-        // }));
         setComment("");
       })
       .catch((err) => {
         console.log(err);
       });
   };
+  
   useEffect(() => {
     getPostById();
   }, []);
+  // ===================================================AddToFavorite===========================
+
+  const addToFavorite = (postId)=>{
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    console.log(headers);
+    
+  
+    axios
+      .post(`http://localhost:5000/posts/${postId}/favorites`,{} ,{headers})
+      .then((res) => {
+     console.log("added");
+     
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+
+  }
+
+
+
   return (
     <>
       <MDBCard className="TextCard">
@@ -310,12 +311,6 @@ const App = () => {
                             rows="{4}"
                             onChange={changeDescription}
                           />
-                          {/* <MDBInput
-                            label="Images"
-                            id="typeURL"
-                            type="url"
-                            onChange={changeUrl}
-                          /> */}
                           <MDBBtn onClick={() => widgetRef.current.open()}>
                             Upload Image
                           </MDBBtn>
@@ -406,9 +401,31 @@ const App = () => {
                       ></div>
                     </a>
                   </div>
+                  <MDBIcon id={post._id} far icon="heart"  onClick={(e)=>{
+                    // setIsClickedToAdd(false)
+                    addToFavorite(e.target.id)
+
+                  }}/>
+                  <MDBIcon id={post._id} fas icon="heart"  onClick={(e)=>{
+                    // setIsClickedToAdd(false)
+                    // deleteFavoriteItem(e.target.id)
+
+                  }}/>
+                  {/* {isClickedToAdd ? <MDBIcon id={post._id} fas icon="heart"  onClick={(e)=>{
+                    setIsClickedToAdd(false)
+                    addToFavorite(e.target.id)
+
+                  }}/> : <MDBIcon id={post._id} far icon="heart" onClick={(e)=>{
+                    setIsClickedToAdd(true)
+
+                  }}/> } */}
+                 
+                  
                 </MDBCol>
+                
               );
             })}
+            
             {post.comments?.map((c, index) => {
               return (
                 <MDBCard
@@ -465,7 +482,6 @@ const App = () => {
                       <img
                         className="lg-image"
                         src={post.media}
-                        // title="YouTube video"
                         allowFullScreen
                         style={{ width: "470px", height: "350px" }}
                       ></img>
