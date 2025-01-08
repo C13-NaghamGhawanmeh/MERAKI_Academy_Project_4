@@ -76,6 +76,7 @@ const App = () => {
   const [error, setError] = useState("");
   const [isCommented, setIsCommented] = useState(false);
   const [author, setAuthor] = useState("");
+  const [authorId, setAuthorId] = useState("")
   const [commenter, setCommenter] = useState("");
   const postInfo = { title, description, media };
   const commentInfo = { comment };
@@ -108,10 +109,13 @@ const App = () => {
         const test = res.data.post[0].comments.map((e) => {
           return e.commenter.userName;
         });
-        console.log("dddddddd", test);
+        console.log("dddddddd", res.data.post[0].author._id);
+        console.log("ooooooooooooo",test);
+        setAuthorId(res.data.post[0].author._id)
         setCommenter(test);
         // console.log("res.data.post", res.data.post[0].comments.map((e)=>{console.log(e);
         // }));
+      
       })
       .catch((err) => {
         console.log(err);
@@ -196,7 +200,7 @@ const App = () => {
                   {post.description}
                 </p>
               </div>
-              {userId === post.author && (
+              {userId === authorId && (
                 <>
                   <MDBDropdown className="Drop">
                     <MDBDropdownToggle color="warning">

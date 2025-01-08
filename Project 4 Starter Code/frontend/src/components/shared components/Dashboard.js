@@ -43,13 +43,13 @@ const Dashboard = () => {
     axios
       .get("http://localhost:5000/posts/getAllPosts", { headers })
       .then((res) => {
-        console.log(res);
+        console.log("nagham here",res);
         setPosts(res.data.posts);
         setUserId(res.data.userId);
         localStorage.setItem("userId", res.data.userId);
         setuserName(res.data.userName);
 
-        console.log("res.data.posts", res.data.posts);
+        // console.log("res.data.posts", res.data.posts);
       })
       .catch((err) => {
         console.log(err);

@@ -40,18 +40,21 @@ export default function App() {
         uploadPreset: "xyz123",
       },
       function (err, res) {
+      try {
         if (res.info.url) {
           setMedia(res.info.url);
-          console.log("result", res.info.url);
+          console.log("success", res.info.url);
         }
-        else{
-          setMedia("https://res.cloudinary.com/dozr5pfwt/image/upload/v1736268395/x1xkmf2yqdkn8lfhzxa2.png");
-
-        }
+       
+      } catch (error) {
+        console.log("failed",error);
+    setMedia("https://res.cloudinary.com/dozr5pfwt/image/upload/v1736268395/x1xkmf2yqdkn8lfhzxa2.png");
+        
+      }
       }
     );
   }, []);
-
+  
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [media, setMedia] = useState("");
@@ -82,7 +85,7 @@ export default function App() {
         //   return p;
         // });
         // console.log("hhhhhhh",post);
-
+        setMedia("")
         setPosts((prevPosts) => [...prevPosts, res.data.post]);
         setResponse(res.data.message);
         setIsCreated(true);
