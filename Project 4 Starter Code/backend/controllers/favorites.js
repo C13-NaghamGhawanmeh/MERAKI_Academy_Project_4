@@ -28,11 +28,11 @@ const addToFavorite = (req, res) => {
 };
 
 const getAllFavorites = (req, res) => {
-    // const userId = req.token.userId;
+    const userId = req.token.userId;
     // const userName = req.token.author;
   
     favoriteModel
-      .find({})
+      .find({favoriteOwner :userId})
       .populate("favoriteItem")
       .then((result) => {
         res.status(200).json({
@@ -51,7 +51,26 @@ const getAllFavorites = (req, res) => {
         });
       });
   };
+  const deleteFavoritItemById = (req, res) => {
+    const favoritItemId = req.params.id;
+    favoriteModel
+      .deleteOne({ _id: favoritItemId })
+      .then((result) => {
+        res.status(200).json({
+          success: true,
+          message: "Post deleted ",
+        });
+      })
+      .catch((err) => {
+        res.status(500).json({
+          success: false,
+          message: "Server Error",
+          err: err.message,
+        });
+      });
+  };
 module.exports = {
   addToFavorite,
   getAllFavorites,
+  deleteFavoritItemById,
 };
