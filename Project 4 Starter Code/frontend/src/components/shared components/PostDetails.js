@@ -96,9 +96,7 @@ const App = () => {
   const changeDescription = (e) => {
     setDescription(e.target.value);
   };
-  const changeUrl = (e) => {
-    setMedia(e.target.value);
-  };
+ 
   const getPostById = () => {
     axios
       .get(`http://localhost:5000/posts/getPostById/${id}`, { headers })

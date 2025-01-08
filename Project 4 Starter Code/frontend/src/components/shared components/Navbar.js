@@ -31,10 +31,6 @@ const Navbar = () => {
     userName,
     setuserName,
   } = useContext(UserContext);
-  // const add = ()=>{
-  //   setCentredModal(!centredModal)
-  //                           <Test />
-  // }
   return (
     <>
       <MDBNavbar sticky light bgColor="white">
@@ -120,6 +116,23 @@ const Navbar = () => {
                               }}
                             >
                               Account
+                            </MDBDropdownItem>
+                            <MDBDropdownItem link>
+                              <Link to={"/Favorites"}>
+                                <MDBBreadcrumbItem>
+                                  <a
+                                    href="#"
+                                    style={{
+                                      fontSize: "18px",
+                                      fontFamily:
+                                        "Arial, Helvetica, sans-serif",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    Saves
+                                  </a>
+                                </MDBBreadcrumbItem>
+                              </Link>
                             </MDBDropdownItem>
                             <MDBDropdownItem link>
                               <Link to={"/Logout"}>

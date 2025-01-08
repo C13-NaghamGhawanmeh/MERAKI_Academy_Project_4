@@ -10,6 +10,7 @@ import AddPost from "./components/shared components/AddPost";
 import Logout from "./components/shared components/logout";
 import PostDetails from "./components/shared components/PostDetails";
 import "antd/dist/reset.css";
+import Favorites from "./components/shared components/Favorites";
 export const UserContext = createContext();
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -58,7 +59,7 @@ const App = () => {
           <Route path="/Logout" element={<Logout />} />
           <Route path="/PostDetails" element={<PostDetails />} />
           <Route path="/PostDetails/:id" element={<PostDetails />} />
-          {/* <Route path="/Favorites/:id" element={<Favorites />} /> */}
+          <Route path="/Favorites" element={<Favorites />} />
         </Routes>
       </div>
     </UserContext.Provider>
