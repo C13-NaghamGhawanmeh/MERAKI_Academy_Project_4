@@ -8,7 +8,7 @@ const register = (req, res) => {
     userName,
     email,
     password,
-    role: "67703adf2db67700da284a3d",
+    role: "67705cd4268120d811eeeec0",
   });
 
   user
@@ -70,6 +70,7 @@ const login = (req, res) => {
           success: true,
           message: `Valid login credentials`,
           token: token,
+          
         });
         console.log(token);
         

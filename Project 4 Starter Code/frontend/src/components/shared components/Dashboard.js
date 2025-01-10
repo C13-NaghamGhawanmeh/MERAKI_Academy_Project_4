@@ -25,6 +25,8 @@ const Dashboard = () => {
     setuserName,
     userId,
     setUserId,
+    role,
+    setRole,
   } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -43,11 +45,13 @@ const Dashboard = () => {
     axios
       .get("http://localhost:5000/posts/getAllPosts", { headers })
       .then((res) => {
-        console.log("nagham here",res);
+        console.log("nagham here", res);
         setPosts(res.data.posts);
         setUserId(res.data.userId);
         localStorage.setItem("userId", res.data.userId);
         setuserName(res.data.userName);
+        setRole(res.data.role.role)
+        localStorage.setItem("role", res.data.role.role);
 
         // console.log("res.data.posts", res.data.posts);
       })
@@ -109,7 +113,7 @@ const Dashboard = () => {
       {posts?.map((a, index) => {
         return (
           <div className="posts " key={index}>
-            <div className="desc" >
+            <div className="desc">
               <MDBCard className="HomeCards">
                 <MDBRipple
                   rippleColor="light"

@@ -65,6 +65,7 @@ const App = () => {
     setIsClickedToUpdate,
     posts,
     setPosts,
+    role,
   } = useContext(UserContext);
   const [optSmModal, setOptSmModal] = useState(false);
 
@@ -149,11 +150,14 @@ const App = () => {
         headers,
       })
       .then((res) => {
-        const newComment = res.data.comment;
-        setPost((prevPost) => ({
-          ...prevPost,
-          comments: [...prevPost.comments, newComment],
-        }));
+        // console.log(res);
+        // setCommenter(res.data.comment.commenter)
+        // const newComment = res.data.comment;
+        // setPost((prevPost) => ({
+        //   ...prevPost,
+        //   comments: [...prevPost.comments, newComment],
+        // }));
+        getPostById();
         setComment("");
       })
       .catch((err) => {
@@ -163,18 +167,17 @@ const App = () => {
 
   const deleteCommentById = (id) => {
     console.log(id);
-    
+
     axios
-      .delete(`http://localhost:5000/posts/${id}/comments/delete`,{headers})
+      .delete(`http://localhost:5000/posts/${id}/comments/delete`, { headers })
       .then((res) => {
         const updatedComments = post.comments.filter((c) => c._id !== id);
         const updatedPost = { ...post, comments: updatedComments };
-  
+
         setPost(updatedPost);
-  
+
         console.log(updatedPost);
         console.log("success");
-        
       })
       .catch((err) => {
         console.log(err);
@@ -449,6 +452,7 @@ const App = () => {
             {post.comments?.map((c, index) => {
               return (
                 <MDBCard
+                  key={`${c._id}-${index}`}
                   style={{
                     marginTop: "15px",
                     width: "700px",
@@ -462,17 +466,28 @@ const App = () => {
                     className="text-break"
                     style={{ alignSelf: "flex-start", padding: "10px" }}
                   >
-                    {c.commenter?.userName}: {c.comment}
+                    {c.commenter.userName} {c.comment}
                   </p>
+                  {(userId === c.commenter._id ||role === "Admin") && (
+                    <MDBBtn
+                      floating
+                      tag="a"
+                      color="danger"
+                      style={{ margin: "10px" }}
+                    >
+                      <MDBIcon
+                        id={c._id}
+                        fas
+                        icon="times"
+                        onClick={(e) => {
+                          console.log("test");
+                          console.log(e.target.id);
 
-                  <MDBBtn  floating tag="a" color="danger" style={{margin:"10px" }}  >
-                  <MDBIcon id={c._id} fas icon="times" onClick={(e)=>{ 
-                    console.log("test");
-                    console.log(e.target.id);
-                    
-                    deleteCommentById(e.target.id)
-                  }}/>
-                  </MDBBtn>
+                          deleteCommentById(e.target.id);
+                        }}
+                      />
+                    </MDBBtn>
+                  )}
                 </MDBCard>
               );
             })}

@@ -19,6 +19,7 @@ const App = () => {
   const [centredModal2, setCentredModal2] = useState(false);
   const [userName, setuserName] = useState("");
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
+  const [role, setRole] = useState(localStorage.getItem("role"));
 
   const [isClickedToAddPost, setisClickedToAddPost] = useState(false);
 
@@ -46,6 +47,8 @@ const App = () => {
         setIsClickedToUpdate,
         centredModal2,
         setCentredModal2,
+        role,
+        setRole,
       }}
     >
       <div className="App">
