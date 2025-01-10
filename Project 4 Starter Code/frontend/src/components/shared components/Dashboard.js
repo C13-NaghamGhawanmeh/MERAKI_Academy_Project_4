@@ -11,103 +11,70 @@ import {
   MDBCardImage,
   MDBCardBody,
   MDBCardTitle,
-  MDBCardText,
 } from "mdb-react-ui-kit";
 const Dashboard = () => {
   const navigate = useNavigate();
 
   const {
     token,
-    setToken,
     posts,
     setPosts,
-    userName,
     setuserName,
-    userId,
     setUserId,
-    role,
     setRole,
+    searchTitle,
+    setsearchTitle,
   } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [media, setMedia] = useState("");
-  const [comment, setcomment] = useState("");
 
-  const [isClickedToUpdate, setIsClickedToUpdate] = useState(false);
-  const [isCommented, setIsCommented] = useState(false);
-
-  const postInfo = { title, description, media };
-  const commentInfo = { comment };
+  const searchInfo = { searchTitle };
   const headers = {
     Authorization: `Bearer ${token}`,
   };
+ 
   const getAllPosts = () => {
     axios
       .get("http://localhost:5000/posts/getAllPosts", { headers })
       .then((res) => {
         console.log("nagham here", res);
-        setPosts(res.data.posts);
         setUserId(res.data.userId);
+        setPosts(res.data.posts);
         localStorage.setItem("userId", res.data.userId);
         setuserName(res.data.userName);
-        setRole(res.data.role.role)
+        setRole(res.data.role.role);
         localStorage.setItem("role", res.data.role.role);
-
-        // console.log("res.data.posts", res.data.posts);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  // const deletePostById = (id) => {
-  //   axios
-  //     .delete(`http://localhost:5000/posts/${id}/delete`)
-  //     .then((res) => {
-  //       const post = posts.filter((post, index) => {
-  //         return post._id !== id;
-  //       });
-  //       setPosts(post);
-  //       console.log(posts);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // const updatePostById = (id) => {
-  //   axios
-  //     .put(`http://localhost:5000/posts/${id}/update`, postInfo)
-  //     .then((res) => {
-  //       const post = posts.map((p, index) => {
-  //         return p;
-  //       });
-  //       setPosts(post);
-  //       getAllPosts();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-  // const addComment = (id) => {
-  //   setIsCommented(true);
-
-  //   axios
-  //     .post(`http://localhost:5000/posts/${id}/comments/`, commentInfo, {
-  //       headers,
-  //     })
-  //     .then((res) => {
-  //       setIsCommented(false);
-  //       getAllPosts();
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const getPostsBySearch = () => {
+    axios
+      .post(
+        "http://localhost:5000/posts/getPostsBySearch",
+        { searchTitle: searchTitle },
+        { headers }
+      )
+      .then((res) => {
+        console.log("nagham here", res);
+        setPosts(res.data.post);
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
   useEffect(() => {
-    getAllPosts();
-  }, []);
-
+    if (searchTitle) {
+      getPostsBySearch();  
+    } else {
+      getAllPosts();  
+    }
+  }, [searchTitle]);  
   return (
     <div className=" DashPost ">
       {posts?.map((a, index) => {

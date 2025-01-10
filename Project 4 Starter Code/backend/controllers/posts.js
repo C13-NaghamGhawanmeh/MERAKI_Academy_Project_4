@@ -128,9 +128,11 @@ const updatePostById = (req, res) => {
     });
 };
 const getPostsBySearch = (req,res)=>{
-  const postTitle = req.body.title;
+  const postTitle = req.body.searchTitle;
+  console.log("kkkkkk",postTitle);
+  
   postModel
-    .find({ title: postTitle })
+    .find({ title:new RegExp(postTitle,"i")  })
     .populate("author")
     .populate({ 
       path: 'comments',

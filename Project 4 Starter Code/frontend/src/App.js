@@ -20,10 +20,10 @@ const App = () => {
   const [userName, setuserName] = useState("");
   const [userId, setUserId] = useState(localStorage.getItem("userId"));
   const [role, setRole] = useState(localStorage.getItem("role"));
-
+  const [posts, setPosts] = useState();
+  const [searchTitle, setsearchTitle] = useState("");
   const [isClickedToAddPost, setisClickedToAddPost] = useState(false);
 
-  const [posts, setPosts] = useState();
   const [isClickedToUpdate, setIsClickedToUpdate] = useState(false);
 
   return (
@@ -49,6 +49,8 @@ const App = () => {
         setCentredModal2,
         role,
         setRole,
+        searchTitle,
+        setsearchTitle,
       }}
     >
       <div className="App">

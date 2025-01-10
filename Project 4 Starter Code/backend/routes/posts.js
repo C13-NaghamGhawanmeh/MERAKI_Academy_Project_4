@@ -40,6 +40,6 @@ postsRouter.post(
 postsRouter.get("/getAllFavorites", authentication, getAllFavorites);
 postsRouter.delete("/:id/deleteFavoriteItem", authentication,deleteFavoritItemById);
 postsRouter.delete("/:id/comments/delete",authentication, deleteCommentById);
-postsRouter.get("/getPostsBySearch", authentication, getPostsBySearch);
+postsRouter.post("/getPostsBySearch",authentication, getPostsBySearch);
 
 module.exports = postsRouter;
