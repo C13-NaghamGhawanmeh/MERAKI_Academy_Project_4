@@ -10,7 +10,7 @@ const {
   getPostById,
 } = require("../controllers/posts");
 
-const { createNewComment } = require("./../controllers/comments");
+const { createNewComment ,deleteCommentById } = require("./../controllers/comments");
 const { addToFavorite ,getAllFavorites ,deleteFavoritItemById} = require("../controllers/favorites");
 
 const postsRouter = express.Router();
@@ -38,5 +38,6 @@ postsRouter.post(
 );
 postsRouter.get("/getAllFavorites", authentication, getAllFavorites);
 postsRouter.delete("/:id/deleteFavoriteItem", authentication,deleteFavoritItemById);
+postsRouter.delete("/:id/comments/delete",authentication, deleteCommentById);
 
 module.exports = postsRouter;

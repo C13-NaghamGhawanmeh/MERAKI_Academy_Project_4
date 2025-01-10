@@ -77,7 +77,7 @@ const App = () => {
   const [isError, setIsError] = useState(false);
   const [response, setResponse] = useState("");
   const [error, setError] = useState("");
-  const [isCommented, setIsCommented] = useState(false);
+  const [isHoverd, setIsHoverd] = useState(false);
   const [author, setAuthor] = useState("");
   const [authorId, setAuthorId] = useState("");
   const [commenter, setCommenter] = useState("");
@@ -96,14 +96,14 @@ const App = () => {
   const changeDescription = (e) => {
     setDescription(e.target.value);
   };
- 
+
   const getPostById = () => {
     axios
       .get(`http://localhost:5000/posts/getPostById/${id}`, { headers })
       .then((res) => {
         setPost(res.data.post[0]);
         setAuthor(res.data.post[0].author.userName);
-        // console.log("dddddddd", res.data.post[0].author._id);
+        console.log("dddddddd", res.data.post[0]);
         setAuthorId(res.data.post[0].author._id);
       })
       .catch((err) => {
@@ -161,6 +161,25 @@ const App = () => {
       });
   };
 
+  const deleteCommentById = (id) => {
+    console.log(id);
+    
+    axios
+      .delete(`http://localhost:5000/posts/${id}/comments/delete`,{headers})
+      .then((res) => {
+        const updatedComments = post.comments.filter((c) => c._id !== id);
+        const updatedPost = { ...post, comments: updatedComments };
+  
+        setPost(updatedPost);
+  
+        console.log(updatedPost);
+        console.log("success");
+        
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   useEffect(() => {
     getPostById();
   }, []);
@@ -434,6 +453,9 @@ const App = () => {
                     marginTop: "15px",
                     width: "700px",
                     height: "max-content",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
                   }}
                 >
                   <p
@@ -442,6 +464,15 @@ const App = () => {
                   >
                     {c.commenter?.userName}: {c.comment}
                   </p>
+
+                  <MDBBtn  floating tag="a" color="danger" style={{margin:"10px" }}  >
+                  <MDBIcon id={c._id} fas icon="times" onClick={(e)=>{ 
+                    console.log("test");
+                    console.log(e.target.id);
+                    
+                    deleteCommentById(e.target.id)
+                  }}/>
+                  </MDBBtn>
                 </MDBCard>
               );
             })}

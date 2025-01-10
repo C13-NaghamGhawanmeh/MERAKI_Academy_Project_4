@@ -42,6 +42,26 @@ const createNewComment = (req, res) => {
     });
 };
 
+const deleteCommentById=(req,res)=>{
+  const postId = req.params.id;
+  commentsModel
+    .findByIdAndDelete({_id: postId })
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: "Comment deleted ",
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error",
+        err: err.message,
+      });
+    });
+}
 module.exports = {
   createNewComment,
+  deleteCommentById,
+
 };

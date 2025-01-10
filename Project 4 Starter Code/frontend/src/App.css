@@ -205,3 +205,12 @@ gap: 100px;
 
   height: 40px;
 }
+/* .iconn:hover{
+  color: red;
+} */
+ .DeleteBtn{
+  max-width: 10px !important;
+  text-align: justify;
+  margin-top: 13px;
+  margin-right: 5px;
+ }
