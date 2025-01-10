@@ -199,6 +199,7 @@ const Navbar = () => {
           </div>
         </MDBContainer>
       </MDBNavbar>
+      
     </>
   );
 };

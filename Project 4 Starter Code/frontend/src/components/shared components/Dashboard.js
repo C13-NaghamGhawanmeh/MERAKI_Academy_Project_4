@@ -11,7 +11,13 @@ import {
   MDBCardImage,
   MDBCardBody,
   MDBCardTitle,
+  MDBFooter,
+  MDBContainer,
+  MDBIcon,
+  MDBRow,
+  MDBCol
 } from "mdb-react-ui-kit";
+
 const Dashboard = () => {
   const navigate = useNavigate();
 
@@ -23,13 +29,8 @@ const Dashboard = () => {
     setUserId,
     setRole,
     searchTitle,
-    setsearchTitle,
   } = useContext(UserContext);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [media, setMedia] = useState("");
 
-  const searchInfo = { searchTitle };
   const headers = {
     Authorization: `Bearer ${token}`,
   };
@@ -76,6 +77,7 @@ const Dashboard = () => {
     }
   }, [searchTitle]);  
   return (
+    <>
     <div className=" DashPost ">
       {posts?.map((a, index) => {
         return (
@@ -124,24 +126,102 @@ const Dashboard = () => {
                     color="warning"
                     onClick={(e) => {
                       navigate(`/PostDetails/${e.target.id}`);
+                     
                     }}
                   >
                     More Details
                   </MDBBtn>
                 </MDBCardBody>
               </MDBCard>
-
-              {/*  */}
-              {/* <div>title : {a.title}</div>
-              <div>description : {a.description}</div>
-              {a.media.map((p, index) => {
-                return <img src={p} />;
-              })} */}
             </div>
           </div>
         );
       })}
     </div>
+    <MDBFooter className='text-center text-white ' style={{ backgroundColor: 'white',    height: "85px" }}>
+      <MDBContainer className='pt-4 cont'>
+        <section className='mb-4 section1'>
+          <MDBBtn
+            rippleColor="dark"
+            color='link'
+            floating
+            size="lg"
+            className='text-dark m-1'
+            href='#!'
+            role='button'
+          >
+            <MDBIcon fab className='fab fa-facebook-f' size="2x" />
+          </MDBBtn>
+
+          <MDBBtn
+            rippleColor="dark"
+            color='link'
+            floating
+            size="lg"
+            className='text-dark m-1'
+            href='#!'
+            role='button'
+          >
+            <MDBIcon fab className='fa-twitter'  size="2x" />
+          </MDBBtn>
+
+          <MDBBtn
+            rippleColor="dark"
+            color='link'
+            floating
+            size="lg"
+            className='text-dark m-1'
+            href='#!'
+            role='button'
+          >
+            <MDBIcon fab className='fa-google'   size="2x"/>
+          </MDBBtn>
+
+          <MDBBtn
+            rippleColor="dark"
+            color='link'
+            floating
+            size="lg"
+            className='text-dark m-1'
+            href='#!'
+            role='button'
+          >
+            <MDBIcon fab className='fa-instagram'  size="2x"/>
+          </MDBBtn>
+
+          <MDBBtn
+            rippleColor="dark"
+            color='link'
+            floating
+            size="lg"
+            className='text-dark m-1'
+            href='#!'
+            role='button'
+          >
+            <MDBIcon fab className='fa-linkedin' size="2x" />
+          </MDBBtn>
+
+          <MDBBtn
+            rippleColor="dark"
+            color='link'
+            floating
+            size="lg"
+            className='text-dark m-1'
+            href='#!'
+            role='button'
+          >
+            <MDBIcon fab className='fa-github'  size="2x"/>
+          </MDBBtn>
+        </section>
+      </MDBContainer>
+
+      <div className='text-center text-dark p-3 footer' style={{ backgroundColor: "rgb(227 160 27 / 79%)" ,}}>
+        <p style={{marginTop:"9px" ,fontSize:"18px"}}>© 2024 Copyright:Sakan.com</p>
+          
+      </div>
+    </MDBFooter>
+    
+    </>
   );
 };
 
