@@ -127,11 +127,35 @@ const updatePostById = (req, res) => {
       });
     });
 };
-
+const getPostsBySearch = (req,res)=>{
+  const postTitle = req.body.title;
+  postModel
+    .find({ title: postTitle })
+    .populate("author")
+    .populate({ 
+      path: 'comments',
+      populate: { path: 'commenter' }
+    })
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: "this Post",
+        post: result,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: "Server Error ggg",
+        err: err.message,
+      });
+    });
+}
 module.exports = {
   createNewPost,
   getAllPosts,
   deletePostById,
   updatePostById,
   getPostById,
+  getPostsBySearch,
 };

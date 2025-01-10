@@ -94,19 +94,6 @@ const Favorites = () => {
     axios
       .delete(`http://localhost:5000/posts/${id}/comments/delete`, { headers })
       .then((res) => {
-        // const updatedPosts = favoritePosts.map((post) => {
-        //   if (post._id === id) {
-        //     // تحديث الكومنتات داخل البوست المحدد
-        //     return {
-        //       ...post,
-        //       comments: post.comments.filter((c) => c._id !== id),
-        //     };
-        //   }
-        //   return post; // باقي البوستات تظل كما هي
-        // });
-  
-        // setFavoritePosts(updatedPosts);
-
         const updatedPosts = favoritePosts.map((post) => {
           return {
             ...post,
@@ -117,7 +104,7 @@ const Favorites = () => {
           };
         });
   
-        setFavoritePosts(updatedPosts); // تحديث الحالة
+        setFavoritePosts(updatedPosts); 
       })
       .catch((err) => {
         console.log(err);

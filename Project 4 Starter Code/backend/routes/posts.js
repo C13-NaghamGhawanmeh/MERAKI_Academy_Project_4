@@ -8,6 +8,7 @@ const {
   deletePostById,
   updatePostById,
   getPostById,
+  getPostsBySearch,
 } = require("../controllers/posts");
 
 const { createNewComment ,deleteCommentById } = require("./../controllers/comments");
@@ -39,5 +40,6 @@ postsRouter.post(
 postsRouter.get("/getAllFavorites", authentication, getAllFavorites);
 postsRouter.delete("/:id/deleteFavoriteItem", authentication,deleteFavoritItemById);
 postsRouter.delete("/:id/comments/delete",authentication, deleteCommentById);
+postsRouter.get("/getPostsBySearch", authentication, getPostsBySearch);
 
 module.exports = postsRouter;
