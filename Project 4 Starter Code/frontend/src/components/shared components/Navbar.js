@@ -18,6 +18,7 @@ import {
   MDBDropdownMenu,
   MDBDropdownItem,
   MDBIcon,
+  MDBNavbarLink,
 } from "mdb-react-ui-kit";
 const Navbar = () => {
   const {
@@ -48,118 +49,105 @@ const Navbar = () => {
             </MDBNavbarBrand>
           </div>
           {token && (
-            <MDBInputGroup  className="d-flex w-auto mb-3 Search">
+            <MDBInputGroup className="d-flex w-auto mb-3 Search">
               <input
                 className="form-control Input"
                 placeholder="Search"
                 aria-label="Search"
                 // type="Search"
-                onChange={(e)=>{
-                    setsearchTitle(e.target.value)
-                    // localStorage.setItem("searchTitle",e.target.value)
+                onChange={(e) => {
+                  setsearchTitle(e.target.value);
+                  // localStorage.setItem("searchTitle",e.target.value)
                   console.log(e.target.value);
-                  
                 }}
               />
-              <MDBBtn  outline color="warning">
+              <MDBBtn outline color="warning">
                 Search
               </MDBBtn>
             </MDBInputGroup>
           )}
-          <div>
+          <div
+            style={{
+              // display: "grid",
+              // gridTemplateColumns:"1fr1fr",
+              width:"18%"
+              // justifyContent: "space-between",
+            }}
+          >
             {token ? (
-              <div>
-                <nav aria-label="breadcrumb">
-                  <MDBBreadcrumb className="BreadcrumbItem">
-                    <MDBBreadcrumbItem>
-                      <Link to={"/Dashboard"}>
-                        <a
-                          href="#"
-                          style={{
-                            fontSize: "22px",
-                            fontFamily: "Arial, Helvetica, sans-serif",
-                          }}
-                        >
-                          Home
-                        </a>
-                      </Link>
-                    </MDBBreadcrumbItem>
-                    <MDBBreadcrumbItem>
-                      <a
-                        href="#"
-                        onClick={() => {
-                          setCentredModal(!centredModal);
-                          setisClickedToAddPost(true);
-                        }}
+              <div  >
+                <nav aria-label="breadcrumb" style={{
+                display: "flex",
+                // flexDirection:"row"
+                // width:"40%"
+                justifyContent: "space-between",
+              }}>
+                  <MDBNavbarLink
+                    href="/Dashboard"
+                    style={{
+                      fontSize: "22px",
+                      fontFamily: "Arial, Helvetica, sans-serif",
+                    }}
+                  >
+                    Home
+                  </MDBNavbarLink>
+
+                  <MDBNavbarLink
+                    href="#"
+                    onClick={() => {
+                      setCentredModal(!centredModal);
+                      setisClickedToAddPost(true);
+                    }}
+                    style={{
+                      fontSize: "22px",
+                      fontFamily: "Arial, Helvetica, sans-serif",
+                    }}
+                  >
+                    Add Post
+                  </MDBNavbarLink>
+
+                  {isClickedToAddPost && <AddPost />}
+
+                  <MDBDropdown>
+                    <MDBDropdownToggle
+                      tag="a"
+                      className="nav-link"
+                      role="button"
+                      style={{
+                        marginRight: "15px",
+                      }}
+                    >
+                      <MDBIcon far size="2x" icon="user-circle" />
+                    </MDBDropdownToggle>
+                    <MDBDropdownMenu>
+                      <MDBDropdownItem
+                        link
                         style={{
-                          fontSize: "22px",
+                          fontSize: "18px",
                           fontFamily: "Arial, Helvetica, sans-serif",
                         }}
                       >
-                        Add Post
-                      </a>
-                    </MDBBreadcrumbItem>
-                    {isClickedToAddPost && <AddPost />}
-                    {/* </Link> */}
-
-                    <MDBBreadcrumbItem>
-                      <MDBDropdown>
-                        <MDBDropdownToggle
-                          tag="a"
-                          className="nav-link"
-                          role="button"
-                          style={{
-                            marginRight: "15px",
-                          }}
-                        >
-                          <MDBIcon far size="1x" icon="user-circle" />
-                        </MDBDropdownToggle>
-                        <MDBDropdownMenu>
-                          <MDBDropdownItem
-                            link
+                        Account
+                      </MDBDropdownItem>
+                      <MDBDropdownItem link>
+                        <Link to={"/Favorites"}>Saves</Link>
+                      </MDBDropdownItem>
+                      <MDBDropdownItem link>
+                        <Link to={"/Logout"}>
+                          <a
+                            href="#"
                             style={{
                               fontSize: "18px",
                               fontFamily: "Arial, Helvetica, sans-serif",
+                              fontWeight: "bold",
                             }}
                           >
-                            Account
-                          </MDBDropdownItem>
-                          <MDBDropdownItem link>
-                            <Link to={"/Favorites"}>
-                              <MDBBreadcrumbItem>
-                                <a
-                                  href="#"
-                                  style={{
-                                    fontSize: "18px",
-                                    fontFamily: "Arial, Helvetica, sans-serif",
-                                    fontWeight: "bold",
-                                  }}
-                                >
-                                  Saves
-                                </a>
-                              </MDBBreadcrumbItem>
-                            </Link>
-                          </MDBDropdownItem>
-                          <MDBDropdownItem link>
-                            <Link to={"/Logout"}>
-                              <MDBBreadcrumbItem>
-                                <a
-                                  href="#"
-                                  style={{
-                                    fontSize: "18px",
-                                    fontFamily: "Arial, Helvetica, sans-serif",
-                                    fontWeight: "bold",
-                                  }}
-                                >
-                                  Logout ({userName})
-                                </a>
-                              </MDBBreadcrumbItem>
-                            </Link>
-                          </MDBDropdownItem>
-                        </MDBDropdownMenu>
-                      </MDBDropdown>
-                    </MDBBreadcrumbItem>
-                  </MDBBreadcrumb>
+                            Logout ({userName})
+                          </a>
+                        </Link>
+                      </MDBDropdownItem>
+                    </MDBDropdownMenu>
+                  </MDBDropdown>
                 </nav>
               </div>
             ) : (
@@ -199,7 +187,6 @@ const Navbar = () => {
           </div>
         </MDBContainer>
       </MDBNavbar>
-      
     </>
   );
 };

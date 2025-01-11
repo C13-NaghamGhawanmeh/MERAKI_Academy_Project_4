@@ -215,7 +215,7 @@ const Dashboard = () => {
         </section>
       </MDBContainer>
 
-      <div className='text-center text-dark p-3 footer' style={{ backgroundColor: "rgb(227 160 27 / 79%)" ,}}>
+      <div className='text-center text-dark p-3 footer' style={{ backgroundColor: "rgb(227 160 27 / 79%)" }}>
         <p style={{marginTop:"9px" ,fontSize:"18px"}}>© 2024 Copyright:Sakan.com</p>
           
       </div>

@@ -1,10 +1,10 @@
 <p align="center">
 <a href="https://www.meraki-academy.org" target="_blank" rel="noopener noreferrer">
- <img width="400px" height="100px" src="https://www.meraki-academy.org/assets/img/logov02.svg" alt="Project logo">
+ <img width="400px" height="100px" src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1735912458/w56gfxnku52f4mirc6im.jpg" alt="Project logo">
  </a>
 </p>
 
-<h3 align="center">Project Title
+<h3 align="center">Sakan
 </h3>
 
 ---
@@ -76,9 +76,11 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 Ex.
 
-- You don't have to register to navigate our web app
+- You have to register to navigate our web app
 - You can click on the **Home** tab provided in the navigation bar to view the home section
-- You can click on the **Add to cart** button to add this product to your cart but you have to be one of our users, so you should create an account
+- You can click on the **Add Post** to create post, but you have to be one of our users, so you should create an account
+- You can click on  **Save Post** to add this post to the saved
+- You can create comments
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
@@ -89,8 +91,8 @@ Ex.
 
 ## User Story <a name = "#user_story"></a>
 
-Your trello board link
-<a href=''>Trello</a>
+
+<a href='https://github.com/C13-NaghamGhawanmeh/MERAKI_Academy_Project_4.git'>Trello</a>
 
 ## Data Flow <a name = "#data_flow"></a>
 
