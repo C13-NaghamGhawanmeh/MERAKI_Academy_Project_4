@@ -4,8 +4,8 @@
  </a>
 </p>
 
-<h3 align="center">Sakan
-</h3>
+<h1 align="center">Sakan
+</h1>
 
 ---
 
