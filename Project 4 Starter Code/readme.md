@@ -45,7 +45,7 @@ These instructions will get you a copy of the project up and running on your loc
 1. Clone the repo to your local machine using git bash.
 
 ```
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/C13-NaghamGhawanmeh/MERAKI_Academy_Project_4.git
 ```
 
 2. Install packeges repeat this step in backend and frontend folder
@@ -70,20 +70,38 @@ Now app ready to use
 
 ## 🎈 Usage <a name="usage"></a>
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Here’s how to make the most of Sakan:
 
-Ex.
+-Register an Account:
 
-Here’s how to use Sakan effectively:
+Sign up to access all features of the platform.
 
--Register an Account: To start using the platform, create an account by signing up.
--Post Your Needs: If you're looking for a room or roommate, click on the Add Post tab in the navigation bar to create a post describing your housing requirements.
--Browse Posts: Use the Search feature to find rooms or roommates based on your preferences (e.g., location, budget, or room type).
--Save Posts: If you find a post that interests you, click on Save Post to add it to your saved list for future reference.
--Interact with Users: Use the Comments feature to ask questions or interact with other users about their posts.
--Manage Your Posts: View, edit, or delete your posts in your profile section for full control over your listings.
--Whether you're a student looking for accommodation near your university or an employee relocating for work, Sakan makes finding housing simple and efficient.
+-Post Your Needs:
 
+If you’re looking for a room or a roommate, click on the Add Post tab to create a detailed post.
+Add a title and description to clearly outline your needs or the room details.
+Upload an image to make your post more appealing and informative.
+After publishing, you can edit your post (title, description, or image) anytime from your profile section.
+Browse Posts:
+Use the Search feature to filter posts by location, budget, or room type and find the perfect match.
+
+-Save Posts:
+
+If you find a post you’re interested in, click Save Post to add it to your personal saved list.
+Access all your saved posts in the Saved Posts section.
+If a saved post is no longer relevant, you can easily remove it from your saved list.
+
+-Interact with Comments:
+
+Add comments to posts to ask questions or connect with other users.
+Delete your own comments if needed.
+Admins can manage and delete any comments across the platform.
+
+-Manage Posts:
+
+As a post owner, you can view, edit, or delete your posts at any time.
+Admins have the ability to delete any post to maintain platform quality and compliance.
+With Sakan, you can efficiently create and manage posts, interact with the community, and find housing or roommates that fit your needs perfectly!
 ## ⛏️ Built Using <a name = "built_using"></a>
 
 - [MongoDB](https://www.mongodb.com/) - Database
@@ -97,7 +115,7 @@ Here’s how to use Sakan effectively:
 
 ## Data Flow <a name = "#data_flow"></a>
 
-<img width=200px height=200px src="https://cacoo.com/assets/site/img/templates/screenshots/er-database-diagram.png" alt="Diagram"></a>
+<img width=200px height=200px src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1736598766/y2ngawulkah3wncl1ace.png" alt="Diagram"></a>
 
 ## ⚠️ Guided By <a name = "guided_by"></a>
 
