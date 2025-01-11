@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://www.meraki-academy.org" target="_blank" rel="noopener noreferrer">
- <img width="400px" height="100px" src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1735912458/w56gfxnku52f4mirc6im.jpg" alt="Project logo">
+ <img width="500px" height="200px" src="https://res.cloudinary.com/dozr5pfwt/image/upload/v1735912458/w56gfxnku52f4mirc6im.jpg" alt="Project logo">
  </a>
 </p>
 
@@ -9,11 +9,11 @@
 
 ---
 
-<p align="center"> An awesome Project to describe README 
+<!-- <p align="center"> An awesome Project to describe README 
     <br> 
 <a href=''>Demo</a>
     <br> 
-</p>
+</p> -->
 
 ## 📝 Table of Contents
 
@@ -27,9 +27,7 @@
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
-
-Ex. Are you looking for a quick and easy way to action, action, and action? The **(name of application)** is the greatest and most accurate application to do this for you. It helps you to **(list of activities)**. The **(name of application)** provides a simple design to ensure having the best user experience.
+**Sakan** is your ultimate solution for finding the perfect place to live or the ideal roommate. Whether you’re a student moving closer to university or an employee relocating for work in a different city, Sakan connects you with housing options tailored to your needs. Easily post what you're looking for, browse available rooms or properties, and find the right fit with our advanced search and filtering tools. Save your favorite posts, interact through comments, and make your housing search seamless and stress-free.**Sakan**—because finding a home should be as easy as feeling at home.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -76,11 +74,15 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 Ex.
 
-- You have to register to navigate our web app
-- You can click on the **Home** tab provided in the navigation bar to view the home section
-- You can click on the **Add Post** to create post, but you have to be one of our users, so you should create an account
-- You can click on  **Save Post** to add this post to the saved
-- You can create comments
+Here’s how to use Sakan effectively:
+
+-Register an Account: To start using the platform, create an account by signing up.
+-Post Your Needs: If you're looking for a room or roommate, click on the Add Post tab in the navigation bar to create a post describing your housing requirements.
+-Browse Posts: Use the Search feature to find rooms or roommates based on your preferences (e.g., location, budget, or room type).
+-Save Posts: If you find a post that interests you, click on Save Post to add it to your saved list for future reference.
+-Interact with Users: Use the Comments feature to ask questions or interact with other users about their posts.
+-Manage Your Posts: View, edit, or delete your posts in your profile section for full control over your listings.
+-Whether you're a student looking for accommodation near your university or an employee relocating for work, Sakan makes finding housing simple and efficient.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
@@ -90,7 +92,6 @@ Ex.
 - [Node JS](https://nodejs.org/en/) - Server Environment
 
 ## User Story <a name = "#user_story"></a>
-
 
 <a href='https://trello.com/invite/b/676edb34f5366d1fc86d4657/ATTIe206d4ed833296ca13720c758737178940D374C5/project-4'>Trello</a>
 
