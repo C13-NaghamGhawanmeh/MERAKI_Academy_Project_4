@@ -125,12 +125,15 @@ const Navbar = () => {
                         style={{
                           fontSize: "18px",
                           fontFamily: "Arial, Helvetica, sans-serif",
+                          color:"black"
+
                         }}
                       >
                         Account
                       </MDBDropdownItem>
                       <MDBDropdownItem link>
-                        <Link to={"/Favorites"}>Saves</Link>
+                              
+                        <Link style={{color:"black",fontSize:"18px"}}  to={"/Favorites"}>Saves</Link>
                       </MDBDropdownItem>
                       <MDBDropdownItem link>
                         <Link to={"/Logout"}>
@@ -140,6 +143,7 @@ const Navbar = () => {
                               fontSize: "18px",
                               fontFamily: "Arial, Helvetica, sans-serif",
                               fontWeight: "bold",
+                              color:"black"
                             }}
                           >
                             Logout ({userName})

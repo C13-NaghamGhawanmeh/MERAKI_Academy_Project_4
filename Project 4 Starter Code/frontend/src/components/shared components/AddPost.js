@@ -79,13 +79,13 @@ export default function App() {
     };
 
     axios
-      .post("http://localhost:5000/posts/createPost", postInfo, { headers })
+      .post("https://sakan-0h0g.onrender.com/posts/createPost", postInfo, { headers })
       .then((res) => {
         // const post = posts.map((p, index) => {
         //   return p;
         // });
         // console.log("hhhhhhh",post);
-        setMedia("")
+        setMedia("");
         setPosts((prevPosts) => [...prevPosts, res.data.post]);
         setResponse(res.data.message);
         setIsCreated(true);

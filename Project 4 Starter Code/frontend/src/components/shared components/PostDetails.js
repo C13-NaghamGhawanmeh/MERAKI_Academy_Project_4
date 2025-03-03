@@ -99,7 +99,7 @@ const App = () => {
 
   const getPostById = () => {
     axios
-      .get(`http://localhost:5000/posts/getPostById/${id}`, { headers })
+      .get(`https://sakan-0h0g.onrender.com/posts/getPostById/${id}`, { headers })
       .then((res) => {
         setPost(res.data.post[0]);
         setAuthor(res.data.post[0].author.userName);
@@ -112,7 +112,7 @@ const App = () => {
   };
   const deletePostById = (id) => {
     axios
-      .delete(`http://localhost:5000/posts/${id}/delete`)
+      .delete(`https://sakan-0h0g.onrender.com/posts/${id}/delete`)
       .then((res) => {
         const post = posts.filter((post, index) => {
           return post._id !== id;
@@ -126,7 +126,7 @@ const App = () => {
   };
   const updatePostById = (id) => {
     axios
-      .put(`http://localhost:5000/posts/${id}/update`, postInfo)
+      .put(`https://sakan-0h0g.onrender.com/posts/${id}/update`, postInfo)
       .then((res) => {
         // console.log(res);
         const updatedPost = res.data.post;
@@ -142,7 +142,7 @@ const App = () => {
   const addComment = (id) => {
 
     axios
-      .post(`http://localhost:5000/posts/${id}/comments/`, commentInfo, {
+      .post(`https://sakan-0h0g.onrender.com/posts/${id}/comments/`, commentInfo, {
         headers,
       })
       .then((res) => {
@@ -163,7 +163,7 @@ const App = () => {
 
   const deleteCommentById = (id) => {
     axios
-      .delete(`http://localhost:5000/posts/${id}/comments/delete`, { headers })
+      .delete(`https://sakan-0h0g.onrender.com/posts/${id}/comments/delete`, { headers })
       .then((res) => {
         const updatedComments = post.comments.filter((c) => c._id !== id);
         const updatedPost = { ...post, comments: updatedComments };
@@ -182,7 +182,7 @@ const App = () => {
 
   const addToFavorite = (postId) => {
     axios
-      .post(`http://localhost:5000/posts/${postId}/favorites`, {}, { headers })
+      .post(`https://sakan-0h0g.onrender.com/posts/${postId}/favorites`, {}, { headers })
       .then((res) => {
         console.log(res);
       })
@@ -193,7 +193,7 @@ const App = () => {
 
   const deleteFavoriteItem = (id) => {
     axios
-      .delete(`http://localhost:5000/posts/${id}/deleteFavoriteItem`, {
+      .delete(`https://sakan-0h0g.onrender.com/posts/${id}/deleteFavoriteItem`, {
         headers,
       })
       .then((res) => {

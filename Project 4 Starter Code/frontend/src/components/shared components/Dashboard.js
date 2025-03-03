@@ -37,7 +37,7 @@ const Dashboard = () => {
  
   const getAllPosts = () => {
     axios
-      .get("http://localhost:5000/posts/getAllPosts", { headers })
+      .get("https://sakan-0h0g.onrender.com/posts/getAllPosts", { headers })
       .then((res) => {
         console.log("nagham here", res);
         setUserId(res.data.userId);
@@ -55,7 +55,7 @@ const Dashboard = () => {
   const getPostsBySearch = () => {
     axios
       .post(
-        "http://localhost:5000/posts/getPostsBySearch",
+        "https://sakan-0h0g.onrender.com/posts/getPostsBySearch",
         { searchTitle: searchTitle },
         { headers }
       )

@@ -35,7 +35,7 @@ function Login() {
     setIsLogged(false);
 
     axios
-      .post("http://localhost:5000/users/login", userInfo)
+      .post("https://sakan-0h0g.onrender.com/users/login", userInfo)
       .then((res) => {
         const data = res;
         setIsLogged(true);

@@ -28,7 +28,7 @@ const Favorites = () => {
   };
   const getAllFavorites = () => {
     axios
-      .get("http://localhost:5000/posts/getAllFavorites", { headers })
+      .get("https://sakan-0h0g.onrender.com/posts/getAllFavorites", { headers })
       .then((res) => {
         console.log(res.data.favorites);
         const data = res.data.favorites;
@@ -40,7 +40,7 @@ const Favorites = () => {
   };
   const deleteFavoriteItem = (id) => {
     axios
-      .delete(`http://localhost:5000/posts/${id}/deleteFavoriteItem`, {
+      .delete(`https://sakan-0h0g.onrender.com/posts/${id}/deleteFavoriteItem`, {
         headers,
       })
       .then((res) => {
@@ -61,7 +61,7 @@ const Favorites = () => {
     // setIsCommented(true);
 
     axios
-      .post(`http://localhost:5000/posts/${id}/comments/`, commentInfo, {
+      .post(`https://sakan-0h0g.onrender.com/posts/${id}/comments/`, commentInfo, {
         headers,
       })
       .then((res) => {
@@ -92,7 +92,7 @@ const Favorites = () => {
     console.log(id);
 
     axios
-      .delete(`http://localhost:5000/posts/${id}/comments/delete`, { headers })
+      .delete(`https://sakan-0h0g.onrender.com/posts/${id}/comments/delete`, { headers })
       .then((res) => {
         const updatedPosts = favoritePosts.map((post) => {
           return {

@@ -35,7 +35,7 @@ function Login() {
     console.log(userInfo);
 
     axios
-      .post("http://localhost:5000/users/register", userInfo)
+      .post("https://sakan-0h0g.onrender.com/users/register", userInfo)
       .then((res) => {
         setIsRegistered(true);
         const data = res;
